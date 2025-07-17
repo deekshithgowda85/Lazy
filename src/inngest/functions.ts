@@ -7,10 +7,9 @@ export const helloWorld = inngest.createFunction(
   async ({ event }) => {
     const codeAgent = createAgent({
       name: "code-agent",
-      system: "You are an expert next.js developer.You write readable ,maintainable code with precise.You write simple Next.js and React snippets with no comment lines(onlycode).",
+      system: "You are an expert Next.js developer. You write readable, maintainable code with precision. You write simple Next.js and React snippets with no comment lines (only code).",
       model: gemini({ model: "gemini-1.5-flash" }),
     });
-
     const { output } = await codeAgent.run(
       `Write the following snippet: ${event.data.value}`
     );

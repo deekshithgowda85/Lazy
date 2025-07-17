@@ -1,0 +1,17 @@
+# This is a config for E2B sandbox template.
+# You can use template ID (1eowr72euuviry3a844t) or template name (lazy-nextjs-test-2) to create a sandbox:
+
+# Python SDK
+# from e2b import Sandbox, AsyncSandbox
+# sandbox = Sandbox("lazy-nextjs-test-2") # Sync sandbox
+# sandbox = await AsyncSandbox.create("lazy-nextjs-test-2") # Async sandbox
+
+# JS SDK
+# import { Sandbox } from 'e2b'
+# const sandbox = await Sandbox.create('lazy-nextjs-test-2')
+
+team_id = "642b2d05-ac91-453e-a718-cde97eff0d35"
+start_cmd = "/compile_page.sh"
+dockerfile = "e2b.Dockerfile"
+template_name = "lazy-nextjs-test-2"
+template_id = "1eowr72euuviry3a844t"

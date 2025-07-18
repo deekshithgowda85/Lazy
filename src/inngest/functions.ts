@@ -19,6 +19,14 @@ export const helloWorld = inngest.createFunction(
       name: "code-agent",
       description: "An expert coding agent",
       system: PROMPT,
+      /*
+      model: openai({
+         model: "gpt-4.1",
+         defaultParameters:{
+            temperature: 0.1,
+          },
+      }),
+      */
       model: gemini({ model: "gemini-1.5-flash"}),
       tools:[
         createTool({

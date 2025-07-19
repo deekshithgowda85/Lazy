@@ -120,10 +120,23 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.UserScalarFieldEnum = {
+exports.Prisma.MessageScalarFieldEnum = {
   id: 'id',
-  email: 'email',
-  name: 'name'
+  content: 'content',
+  role: 'role',
+  type: 'type',
+  createAt: 'createAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.FragmentScalarFieldEnum = {
+  id: 'id',
+  messageId: 'messageId',
+  sandboxUrl: 'sandboxUrl',
+  title: 'title',
+  files: 'files',
+  createAt: 'createAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -131,19 +144,33 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
+};
+
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
 };
 
-exports.Prisma.NullsOrder = {
-  first: 'first',
-  last: 'last'
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+exports.MessageRole = exports.$Enums.MessageRole = {
+  USER: 'USER',
+  ASSISTANT: 'ASSISTANT'
 };
 
+exports.MessageType = exports.$Enums.MessageType = {
+  RESULT: 'RESULT',
+  ERROR: 'ERROR'
+};
 
 exports.Prisma.ModelName = {
-  User: 'User'
+  Message: 'Message',
+  Fragment: 'Fragment'
 };
 
 /**

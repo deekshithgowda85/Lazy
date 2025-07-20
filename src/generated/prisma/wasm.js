@@ -120,19 +120,12 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.ProjectScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
 exports.Prisma.MessageScalarFieldEnum = {
   id: 'id',
   content: 'content',
   role: 'role',
   type: 'type',
-  createAt: 'createAt',
+  createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   projectId: 'projectId'
 };
@@ -143,8 +136,22 @@ exports.Prisma.FragmentScalarFieldEnum = {
   sandboxUrl: 'sandboxUrl',
   title: 'title',
   files: 'files',
-  createAt: 'createAt',
+  createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ProjectScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UsageScalarFieldEnum = {
+  key: 'key',
+  points: 'points',
+  expire: 'expire'
 };
 
 exports.Prisma.SortOrder = {
@@ -166,6 +173,11 @@ exports.Prisma.JsonNullValueFilter = {
   JsonNull: Prisma.JsonNull,
   AnyNull: Prisma.AnyNull
 };
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
 exports.MessageRole = exports.$Enums.MessageRole = {
   USER: 'USER',
   ASSISTANT: 'ASSISTANT'
@@ -177,9 +189,10 @@ exports.MessageType = exports.$Enums.MessageType = {
 };
 
 exports.Prisma.ModelName = {
-  Project: 'Project',
   Message: 'Message',
-  Fragment: 'Fragment'
+  Fragment: 'Fragment',
+  Project: 'Project',
+  Usage: 'Usage'
 };
 
 /**

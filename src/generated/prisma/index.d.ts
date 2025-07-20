@@ -14,11 +14,6 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
- * Model Project
- * 
- */
-export type Project = $Result.DefaultSelection<Prisma.$ProjectPayload>
-/**
  * Model Message
  * 
  */
@@ -28,6 +23,16 @@ export type Message = $Result.DefaultSelection<Prisma.$MessagePayload>
  * 
  */
 export type Fragment = $Result.DefaultSelection<Prisma.$FragmentPayload>
+/**
+ * Model Project
+ * 
+ */
+export type Project = $Result.DefaultSelection<Prisma.$ProjectPayload>
+/**
+ * Model Usage
+ * 
+ */
+export type Usage = $Result.DefaultSelection<Prisma.$UsagePayload>
 
 /**
  * Enums
@@ -65,8 +70,8 @@ export const MessageType: typeof $Enums.MessageType
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Projects
- * const projects = await prisma.project.findMany()
+ * // Fetch zero or more Messages
+ * const messages = await prisma.message.findMany()
  * ```
  *
  *
@@ -86,8 +91,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Projects
-   * const projects = await prisma.project.findMany()
+   * // Fetch zero or more Messages
+   * const messages = await prisma.message.findMany()
    * ```
    *
    *
@@ -184,16 +189,6 @@ export class PrismaClient<
   }>>
 
       /**
-   * `prisma.project`: Exposes CRUD operations for the **Project** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Projects
-    * const projects = await prisma.project.findMany()
-    * ```
-    */
-  get project(): Prisma.ProjectDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.message`: Exposes CRUD operations for the **Message** model.
     * Example usage:
     * ```ts
@@ -212,6 +207,26 @@ export class PrismaClient<
     * ```
     */
   get fragment(): Prisma.FragmentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.project`: Exposes CRUD operations for the **Project** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Projects
+    * const projects = await prisma.project.findMany()
+    * ```
+    */
+  get project(): Prisma.ProjectDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.usage`: Exposes CRUD operations for the **Usage** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Usages
+    * const usages = await prisma.usage.findMany()
+    * ```
+    */
+  get usage(): Prisma.UsageDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -652,9 +667,10 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    Project: 'Project',
     Message: 'Message',
-    Fragment: 'Fragment'
+    Fragment: 'Fragment',
+    Project: 'Project',
+    Usage: 'Usage'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -673,84 +689,10 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "project" | "message" | "fragment"
+      modelProps: "message" | "fragment" | "project" | "usage"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
-      Project: {
-        payload: Prisma.$ProjectPayload<ExtArgs>
-        fields: Prisma.ProjectFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.ProjectFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProjectPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.ProjectFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>
-          }
-          findFirst: {
-            args: Prisma.ProjectFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProjectPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.ProjectFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>
-          }
-          findMany: {
-            args: Prisma.ProjectFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>[]
-          }
-          create: {
-            args: Prisma.ProjectCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>
-          }
-          createMany: {
-            args: Prisma.ProjectCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.ProjectCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>[]
-          }
-          delete: {
-            args: Prisma.ProjectDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>
-          }
-          update: {
-            args: Prisma.ProjectUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>
-          }
-          deleteMany: {
-            args: Prisma.ProjectDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.ProjectUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.ProjectUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>[]
-          }
-          upsert: {
-            args: Prisma.ProjectUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>
-          }
-          aggregate: {
-            args: Prisma.ProjectAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateProject>
-          }
-          groupBy: {
-            args: Prisma.ProjectGroupByArgs<ExtArgs>
-            result: $Utils.Optional<ProjectGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.ProjectCountArgs<ExtArgs>
-            result: $Utils.Optional<ProjectCountAggregateOutputType> | number
-          }
-        }
-      }
       Message: {
         payload: Prisma.$MessagePayload<ExtArgs>
         fields: Prisma.MessageFieldRefs
@@ -899,6 +841,154 @@ export namespace Prisma {
           }
         }
       }
+      Project: {
+        payload: Prisma.$ProjectPayload<ExtArgs>
+        fields: Prisma.ProjectFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ProjectFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ProjectFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>
+          }
+          findFirst: {
+            args: Prisma.ProjectFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ProjectFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>
+          }
+          findMany: {
+            args: Prisma.ProjectFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>[]
+          }
+          create: {
+            args: Prisma.ProjectCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>
+          }
+          createMany: {
+            args: Prisma.ProjectCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ProjectCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>[]
+          }
+          delete: {
+            args: Prisma.ProjectDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>
+          }
+          update: {
+            args: Prisma.ProjectUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>
+          }
+          deleteMany: {
+            args: Prisma.ProjectDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ProjectUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ProjectUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>[]
+          }
+          upsert: {
+            args: Prisma.ProjectUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectPayload>
+          }
+          aggregate: {
+            args: Prisma.ProjectAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateProject>
+          }
+          groupBy: {
+            args: Prisma.ProjectGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ProjectGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ProjectCountArgs<ExtArgs>
+            result: $Utils.Optional<ProjectCountAggregateOutputType> | number
+          }
+        }
+      }
+      Usage: {
+        payload: Prisma.$UsagePayload<ExtArgs>
+        fields: Prisma.UsageFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UsageFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsagePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UsageFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsagePayload>
+          }
+          findFirst: {
+            args: Prisma.UsageFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsagePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UsageFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsagePayload>
+          }
+          findMany: {
+            args: Prisma.UsageFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsagePayload>[]
+          }
+          create: {
+            args: Prisma.UsageCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsagePayload>
+          }
+          createMany: {
+            args: Prisma.UsageCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UsageCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsagePayload>[]
+          }
+          delete: {
+            args: Prisma.UsageDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsagePayload>
+          }
+          update: {
+            args: Prisma.UsageUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsagePayload>
+          }
+          deleteMany: {
+            args: Prisma.UsageDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UsageUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UsageUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsagePayload>[]
+          }
+          upsert: {
+            args: Prisma.UsageUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsagePayload>
+          }
+          aggregate: {
+            args: Prisma.UsageAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUsage>
+          }
+          groupBy: {
+            args: Prisma.UsageGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UsageGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UsageCountArgs<ExtArgs>
+            result: $Utils.Optional<UsageCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -983,9 +1073,10 @@ export namespace Prisma {
     omit?: Prisma.GlobalOmitConfig
   }
   export type GlobalOmitConfig = {
-    project?: ProjectOmit
     message?: MessageOmit
     fragment?: FragmentOmit
+    project?: ProjectOmit
+    usage?: UsageOmit
   }
 
   /* Types for Logging */
@@ -1111,6 +1202,2212 @@ export namespace Prisma {
    */
 
   /**
+   * Model Message
+   */
+
+  export type AggregateMessage = {
+    _count: MessageCountAggregateOutputType | null
+    _min: MessageMinAggregateOutputType | null
+    _max: MessageMaxAggregateOutputType | null
+  }
+
+  export type MessageMinAggregateOutputType = {
+    id: string | null
+    content: string | null
+    role: $Enums.MessageRole | null
+    type: $Enums.MessageType | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    projectId: string | null
+  }
+
+  export type MessageMaxAggregateOutputType = {
+    id: string | null
+    content: string | null
+    role: $Enums.MessageRole | null
+    type: $Enums.MessageType | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    projectId: string | null
+  }
+
+  export type MessageCountAggregateOutputType = {
+    id: number
+    content: number
+    role: number
+    type: number
+    createdAt: number
+    updatedAt: number
+    projectId: number
+    _all: number
+  }
+
+
+  export type MessageMinAggregateInputType = {
+    id?: true
+    content?: true
+    role?: true
+    type?: true
+    createdAt?: true
+    updatedAt?: true
+    projectId?: true
+  }
+
+  export type MessageMaxAggregateInputType = {
+    id?: true
+    content?: true
+    role?: true
+    type?: true
+    createdAt?: true
+    updatedAt?: true
+    projectId?: true
+  }
+
+  export type MessageCountAggregateInputType = {
+    id?: true
+    content?: true
+    role?: true
+    type?: true
+    createdAt?: true
+    updatedAt?: true
+    projectId?: true
+    _all?: true
+  }
+
+  export type MessageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Message to aggregate.
+     */
+    where?: MessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Messages to fetch.
+     */
+    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Messages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Messages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Messages
+    **/
+    _count?: true | MessageCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MessageMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MessageMaxAggregateInputType
+  }
+
+  export type GetMessageAggregateType<T extends MessageAggregateArgs> = {
+        [P in keyof T & keyof AggregateMessage]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMessage[P]>
+      : GetScalarType<T[P], AggregateMessage[P]>
+  }
+
+
+
+
+  export type MessageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MessageWhereInput
+    orderBy?: MessageOrderByWithAggregationInput | MessageOrderByWithAggregationInput[]
+    by: MessageScalarFieldEnum[] | MessageScalarFieldEnum
+    having?: MessageScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MessageCountAggregateInputType | true
+    _min?: MessageMinAggregateInputType
+    _max?: MessageMaxAggregateInputType
+  }
+
+  export type MessageGroupByOutputType = {
+    id: string
+    content: string
+    role: $Enums.MessageRole
+    type: $Enums.MessageType
+    createdAt: Date
+    updatedAt: Date
+    projectId: string
+    _count: MessageCountAggregateOutputType | null
+    _min: MessageMinAggregateOutputType | null
+    _max: MessageMaxAggregateOutputType | null
+  }
+
+  type GetMessageGroupByPayload<T extends MessageGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MessageGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MessageGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MessageGroupByOutputType[P]>
+            : GetScalarType<T[P], MessageGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MessageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    content?: boolean
+    role?: boolean
+    type?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    projectId?: boolean
+    fragment?: boolean | Message$fragmentArgs<ExtArgs>
+    project?: boolean | Message$projectArgs<ExtArgs>
+  }, ExtArgs["result"]["message"]>
+
+  export type MessageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    content?: boolean
+    role?: boolean
+    type?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    projectId?: boolean
+    project?: boolean | Message$projectArgs<ExtArgs>
+  }, ExtArgs["result"]["message"]>
+
+  export type MessageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    content?: boolean
+    role?: boolean
+    type?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    projectId?: boolean
+    project?: boolean | Message$projectArgs<ExtArgs>
+  }, ExtArgs["result"]["message"]>
+
+  export type MessageSelectScalar = {
+    id?: boolean
+    content?: boolean
+    role?: boolean
+    type?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    projectId?: boolean
+  }
+
+  export type MessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "role" | "type" | "createdAt" | "updatedAt" | "projectId", ExtArgs["result"]["message"]>
+  export type MessageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    fragment?: boolean | Message$fragmentArgs<ExtArgs>
+    project?: boolean | Message$projectArgs<ExtArgs>
+  }
+  export type MessageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    project?: boolean | Message$projectArgs<ExtArgs>
+  }
+  export type MessageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    project?: boolean | Message$projectArgs<ExtArgs>
+  }
+
+  export type $MessagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Message"
+    objects: {
+      fragment: Prisma.$FragmentPayload<ExtArgs> | null
+      project: Prisma.$ProjectPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      content: string
+      role: $Enums.MessageRole
+      type: $Enums.MessageType
+      createdAt: Date
+      updatedAt: Date
+      projectId: string
+    }, ExtArgs["result"]["message"]>
+    composites: {}
+  }
+
+  type MessageGetPayload<S extends boolean | null | undefined | MessageDefaultArgs> = $Result.GetResult<Prisma.$MessagePayload, S>
+
+  type MessageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MessageFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MessageCountAggregateInputType | true
+    }
+
+  export interface MessageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Message'], meta: { name: 'Message' } }
+    /**
+     * Find zero or one Message that matches the filter.
+     * @param {MessageFindUniqueArgs} args - Arguments to find a Message
+     * @example
+     * // Get one Message
+     * const message = await prisma.message.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MessageFindUniqueArgs>(args: SelectSubset<T, MessageFindUniqueArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Message that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MessageFindUniqueOrThrowArgs} args - Arguments to find a Message
+     * @example
+     * // Get one Message
+     * const message = await prisma.message.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MessageFindUniqueOrThrowArgs>(args: SelectSubset<T, MessageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Message that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageFindFirstArgs} args - Arguments to find a Message
+     * @example
+     * // Get one Message
+     * const message = await prisma.message.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MessageFindFirstArgs>(args?: SelectSubset<T, MessageFindFirstArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Message that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageFindFirstOrThrowArgs} args - Arguments to find a Message
+     * @example
+     * // Get one Message
+     * const message = await prisma.message.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MessageFindFirstOrThrowArgs>(args?: SelectSubset<T, MessageFindFirstOrThrowArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Messages that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Messages
+     * const messages = await prisma.message.findMany()
+     * 
+     * // Get first 10 Messages
+     * const messages = await prisma.message.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const messageWithIdOnly = await prisma.message.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MessageFindManyArgs>(args?: SelectSubset<T, MessageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Message.
+     * @param {MessageCreateArgs} args - Arguments to create a Message.
+     * @example
+     * // Create one Message
+     * const Message = await prisma.message.create({
+     *   data: {
+     *     // ... data to create a Message
+     *   }
+     * })
+     * 
+     */
+    create<T extends MessageCreateArgs>(args: SelectSubset<T, MessageCreateArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Messages.
+     * @param {MessageCreateManyArgs} args - Arguments to create many Messages.
+     * @example
+     * // Create many Messages
+     * const message = await prisma.message.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MessageCreateManyArgs>(args?: SelectSubset<T, MessageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Messages and returns the data saved in the database.
+     * @param {MessageCreateManyAndReturnArgs} args - Arguments to create many Messages.
+     * @example
+     * // Create many Messages
+     * const message = await prisma.message.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Messages and only return the `id`
+     * const messageWithIdOnly = await prisma.message.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MessageCreateManyAndReturnArgs>(args?: SelectSubset<T, MessageCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Message.
+     * @param {MessageDeleteArgs} args - Arguments to delete one Message.
+     * @example
+     * // Delete one Message
+     * const Message = await prisma.message.delete({
+     *   where: {
+     *     // ... filter to delete one Message
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MessageDeleteArgs>(args: SelectSubset<T, MessageDeleteArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Message.
+     * @param {MessageUpdateArgs} args - Arguments to update one Message.
+     * @example
+     * // Update one Message
+     * const message = await prisma.message.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MessageUpdateArgs>(args: SelectSubset<T, MessageUpdateArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Messages.
+     * @param {MessageDeleteManyArgs} args - Arguments to filter Messages to delete.
+     * @example
+     * // Delete a few Messages
+     * const { count } = await prisma.message.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MessageDeleteManyArgs>(args?: SelectSubset<T, MessageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Messages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Messages
+     * const message = await prisma.message.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MessageUpdateManyArgs>(args: SelectSubset<T, MessageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Messages and returns the data updated in the database.
+     * @param {MessageUpdateManyAndReturnArgs} args - Arguments to update many Messages.
+     * @example
+     * // Update many Messages
+     * const message = await prisma.message.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Messages and only return the `id`
+     * const messageWithIdOnly = await prisma.message.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MessageUpdateManyAndReturnArgs>(args: SelectSubset<T, MessageUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Message.
+     * @param {MessageUpsertArgs} args - Arguments to update or create a Message.
+     * @example
+     * // Update or create a Message
+     * const message = await prisma.message.upsert({
+     *   create: {
+     *     // ... data to create a Message
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Message we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MessageUpsertArgs>(args: SelectSubset<T, MessageUpsertArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Messages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageCountArgs} args - Arguments to filter Messages to count.
+     * @example
+     * // Count the number of Messages
+     * const count = await prisma.message.count({
+     *   where: {
+     *     // ... the filter for the Messages we want to count
+     *   }
+     * })
+    **/
+    count<T extends MessageCountArgs>(
+      args?: Subset<T, MessageCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MessageCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Message.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MessageAggregateArgs>(args: Subset<T, MessageAggregateArgs>): Prisma.PrismaPromise<GetMessageAggregateType<T>>
+
+    /**
+     * Group by Message.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MessageGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MessageGroupByArgs['orderBy'] }
+        : { orderBy?: MessageGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MessageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMessageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Message model
+   */
+  readonly fields: MessageFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Message.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MessageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    fragment<T extends Message$fragmentArgs<ExtArgs> = {}>(args?: Subset<T, Message$fragmentArgs<ExtArgs>>): Prisma__FragmentClient<$Result.GetResult<Prisma.$FragmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    project<T extends Message$projectArgs<ExtArgs> = {}>(args?: Subset<T, Message$projectArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Message model
+   */
+  interface MessageFieldRefs {
+    readonly id: FieldRef<"Message", 'String'>
+    readonly content: FieldRef<"Message", 'String'>
+    readonly role: FieldRef<"Message", 'MessageRole'>
+    readonly type: FieldRef<"Message", 'MessageType'>
+    readonly createdAt: FieldRef<"Message", 'DateTime'>
+    readonly updatedAt: FieldRef<"Message", 'DateTime'>
+    readonly projectId: FieldRef<"Message", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Message findUnique
+   */
+  export type MessageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * Filter, which Message to fetch.
+     */
+    where: MessageWhereUniqueInput
+  }
+
+  /**
+   * Message findUniqueOrThrow
+   */
+  export type MessageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * Filter, which Message to fetch.
+     */
+    where: MessageWhereUniqueInput
+  }
+
+  /**
+   * Message findFirst
+   */
+  export type MessageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * Filter, which Message to fetch.
+     */
+    where?: MessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Messages to fetch.
+     */
+    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Messages.
+     */
+    cursor?: MessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Messages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Messages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Messages.
+     */
+    distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+  }
+
+  /**
+   * Message findFirstOrThrow
+   */
+  export type MessageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * Filter, which Message to fetch.
+     */
+    where?: MessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Messages to fetch.
+     */
+    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Messages.
+     */
+    cursor?: MessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Messages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Messages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Messages.
+     */
+    distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+  }
+
+  /**
+   * Message findMany
+   */
+  export type MessageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * Filter, which Messages to fetch.
+     */
+    where?: MessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Messages to fetch.
+     */
+    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Messages.
+     */
+    cursor?: MessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Messages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Messages.
+     */
+    skip?: number
+    distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+  }
+
+  /**
+   * Message create
+   */
+  export type MessageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Message.
+     */
+    data: XOR<MessageCreateInput, MessageUncheckedCreateInput>
+  }
+
+  /**
+   * Message createMany
+   */
+  export type MessageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Messages.
+     */
+    data: MessageCreateManyInput | MessageCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Message createManyAndReturn
+   */
+  export type MessageCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * The data used to create many Messages.
+     */
+    data: MessageCreateManyInput | MessageCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Message update
+   */
+  export type MessageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Message.
+     */
+    data: XOR<MessageUpdateInput, MessageUncheckedUpdateInput>
+    /**
+     * Choose, which Message to update.
+     */
+    where: MessageWhereUniqueInput
+  }
+
+  /**
+   * Message updateMany
+   */
+  export type MessageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Messages.
+     */
+    data: XOR<MessageUpdateManyMutationInput, MessageUncheckedUpdateManyInput>
+    /**
+     * Filter which Messages to update
+     */
+    where?: MessageWhereInput
+    /**
+     * Limit how many Messages to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Message updateManyAndReturn
+   */
+  export type MessageUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * The data used to update Messages.
+     */
+    data: XOR<MessageUpdateManyMutationInput, MessageUncheckedUpdateManyInput>
+    /**
+     * Filter which Messages to update
+     */
+    where?: MessageWhereInput
+    /**
+     * Limit how many Messages to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Message upsert
+   */
+  export type MessageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Message to update in case it exists.
+     */
+    where: MessageWhereUniqueInput
+    /**
+     * In case the Message found by the `where` argument doesn't exist, create a new Message with this data.
+     */
+    create: XOR<MessageCreateInput, MessageUncheckedCreateInput>
+    /**
+     * In case the Message was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MessageUpdateInput, MessageUncheckedUpdateInput>
+  }
+
+  /**
+   * Message delete
+   */
+  export type MessageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * Filter which Message to delete.
+     */
+    where: MessageWhereUniqueInput
+  }
+
+  /**
+   * Message deleteMany
+   */
+  export type MessageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Messages to delete
+     */
+    where?: MessageWhereInput
+    /**
+     * Limit how many Messages to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Message.fragment
+   */
+  export type Message$fragmentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Fragment
+     */
+    select?: FragmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Fragment
+     */
+    omit?: FragmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FragmentInclude<ExtArgs> | null
+    where?: FragmentWhereInput
+  }
+
+  /**
+   * Message.project
+   */
+  export type Message$projectArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Project
+     */
+    select?: ProjectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Project
+     */
+    omit?: ProjectOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectInclude<ExtArgs> | null
+    where?: ProjectWhereInput
+  }
+
+  /**
+   * Message without action
+   */
+  export type MessageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Fragment
+   */
+
+  export type AggregateFragment = {
+    _count: FragmentCountAggregateOutputType | null
+    _min: FragmentMinAggregateOutputType | null
+    _max: FragmentMaxAggregateOutputType | null
+  }
+
+  export type FragmentMinAggregateOutputType = {
+    id: string | null
+    messageId: string | null
+    sandboxUrl: string | null
+    title: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type FragmentMaxAggregateOutputType = {
+    id: string | null
+    messageId: string | null
+    sandboxUrl: string | null
+    title: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type FragmentCountAggregateOutputType = {
+    id: number
+    messageId: number
+    sandboxUrl: number
+    title: number
+    files: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type FragmentMinAggregateInputType = {
+    id?: true
+    messageId?: true
+    sandboxUrl?: true
+    title?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type FragmentMaxAggregateInputType = {
+    id?: true
+    messageId?: true
+    sandboxUrl?: true
+    title?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type FragmentCountAggregateInputType = {
+    id?: true
+    messageId?: true
+    sandboxUrl?: true
+    title?: true
+    files?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type FragmentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Fragment to aggregate.
+     */
+    where?: FragmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Fragments to fetch.
+     */
+    orderBy?: FragmentOrderByWithRelationInput | FragmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FragmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Fragments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Fragments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Fragments
+    **/
+    _count?: true | FragmentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FragmentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FragmentMaxAggregateInputType
+  }
+
+  export type GetFragmentAggregateType<T extends FragmentAggregateArgs> = {
+        [P in keyof T & keyof AggregateFragment]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFragment[P]>
+      : GetScalarType<T[P], AggregateFragment[P]>
+  }
+
+
+
+
+  export type FragmentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FragmentWhereInput
+    orderBy?: FragmentOrderByWithAggregationInput | FragmentOrderByWithAggregationInput[]
+    by: FragmentScalarFieldEnum[] | FragmentScalarFieldEnum
+    having?: FragmentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FragmentCountAggregateInputType | true
+    _min?: FragmentMinAggregateInputType
+    _max?: FragmentMaxAggregateInputType
+  }
+
+  export type FragmentGroupByOutputType = {
+    id: string
+    messageId: string
+    sandboxUrl: string
+    title: string
+    files: JsonValue
+    createdAt: Date
+    updatedAt: Date
+    _count: FragmentCountAggregateOutputType | null
+    _min: FragmentMinAggregateOutputType | null
+    _max: FragmentMaxAggregateOutputType | null
+  }
+
+  type GetFragmentGroupByPayload<T extends FragmentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FragmentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FragmentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FragmentGroupByOutputType[P]>
+            : GetScalarType<T[P], FragmentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FragmentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    messageId?: boolean
+    sandboxUrl?: boolean
+    title?: boolean
+    files?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    message?: boolean | MessageDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["fragment"]>
+
+  export type FragmentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    messageId?: boolean
+    sandboxUrl?: boolean
+    title?: boolean
+    files?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    message?: boolean | MessageDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["fragment"]>
+
+  export type FragmentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    messageId?: boolean
+    sandboxUrl?: boolean
+    title?: boolean
+    files?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    message?: boolean | MessageDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["fragment"]>
+
+  export type FragmentSelectScalar = {
+    id?: boolean
+    messageId?: boolean
+    sandboxUrl?: boolean
+    title?: boolean
+    files?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type FragmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "messageId" | "sandboxUrl" | "title" | "files" | "createdAt" | "updatedAt", ExtArgs["result"]["fragment"]>
+  export type FragmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    message?: boolean | MessageDefaultArgs<ExtArgs>
+  }
+  export type FragmentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    message?: boolean | MessageDefaultArgs<ExtArgs>
+  }
+  export type FragmentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    message?: boolean | MessageDefaultArgs<ExtArgs>
+  }
+
+  export type $FragmentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Fragment"
+    objects: {
+      message: Prisma.$MessagePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      messageId: string
+      sandboxUrl: string
+      title: string
+      files: Prisma.JsonValue
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["fragment"]>
+    composites: {}
+  }
+
+  type FragmentGetPayload<S extends boolean | null | undefined | FragmentDefaultArgs> = $Result.GetResult<Prisma.$FragmentPayload, S>
+
+  type FragmentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FragmentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FragmentCountAggregateInputType | true
+    }
+
+  export interface FragmentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Fragment'], meta: { name: 'Fragment' } }
+    /**
+     * Find zero or one Fragment that matches the filter.
+     * @param {FragmentFindUniqueArgs} args - Arguments to find a Fragment
+     * @example
+     * // Get one Fragment
+     * const fragment = await prisma.fragment.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FragmentFindUniqueArgs>(args: SelectSubset<T, FragmentFindUniqueArgs<ExtArgs>>): Prisma__FragmentClient<$Result.GetResult<Prisma.$FragmentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Fragment that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FragmentFindUniqueOrThrowArgs} args - Arguments to find a Fragment
+     * @example
+     * // Get one Fragment
+     * const fragment = await prisma.fragment.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FragmentFindUniqueOrThrowArgs>(args: SelectSubset<T, FragmentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FragmentClient<$Result.GetResult<Prisma.$FragmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Fragment that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FragmentFindFirstArgs} args - Arguments to find a Fragment
+     * @example
+     * // Get one Fragment
+     * const fragment = await prisma.fragment.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FragmentFindFirstArgs>(args?: SelectSubset<T, FragmentFindFirstArgs<ExtArgs>>): Prisma__FragmentClient<$Result.GetResult<Prisma.$FragmentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Fragment that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FragmentFindFirstOrThrowArgs} args - Arguments to find a Fragment
+     * @example
+     * // Get one Fragment
+     * const fragment = await prisma.fragment.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FragmentFindFirstOrThrowArgs>(args?: SelectSubset<T, FragmentFindFirstOrThrowArgs<ExtArgs>>): Prisma__FragmentClient<$Result.GetResult<Prisma.$FragmentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Fragments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FragmentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Fragments
+     * const fragments = await prisma.fragment.findMany()
+     * 
+     * // Get first 10 Fragments
+     * const fragments = await prisma.fragment.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const fragmentWithIdOnly = await prisma.fragment.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FragmentFindManyArgs>(args?: SelectSubset<T, FragmentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FragmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Fragment.
+     * @param {FragmentCreateArgs} args - Arguments to create a Fragment.
+     * @example
+     * // Create one Fragment
+     * const Fragment = await prisma.fragment.create({
+     *   data: {
+     *     // ... data to create a Fragment
+     *   }
+     * })
+     * 
+     */
+    create<T extends FragmentCreateArgs>(args: SelectSubset<T, FragmentCreateArgs<ExtArgs>>): Prisma__FragmentClient<$Result.GetResult<Prisma.$FragmentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Fragments.
+     * @param {FragmentCreateManyArgs} args - Arguments to create many Fragments.
+     * @example
+     * // Create many Fragments
+     * const fragment = await prisma.fragment.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FragmentCreateManyArgs>(args?: SelectSubset<T, FragmentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Fragments and returns the data saved in the database.
+     * @param {FragmentCreateManyAndReturnArgs} args - Arguments to create many Fragments.
+     * @example
+     * // Create many Fragments
+     * const fragment = await prisma.fragment.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Fragments and only return the `id`
+     * const fragmentWithIdOnly = await prisma.fragment.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FragmentCreateManyAndReturnArgs>(args?: SelectSubset<T, FragmentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FragmentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Fragment.
+     * @param {FragmentDeleteArgs} args - Arguments to delete one Fragment.
+     * @example
+     * // Delete one Fragment
+     * const Fragment = await prisma.fragment.delete({
+     *   where: {
+     *     // ... filter to delete one Fragment
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FragmentDeleteArgs>(args: SelectSubset<T, FragmentDeleteArgs<ExtArgs>>): Prisma__FragmentClient<$Result.GetResult<Prisma.$FragmentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Fragment.
+     * @param {FragmentUpdateArgs} args - Arguments to update one Fragment.
+     * @example
+     * // Update one Fragment
+     * const fragment = await prisma.fragment.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FragmentUpdateArgs>(args: SelectSubset<T, FragmentUpdateArgs<ExtArgs>>): Prisma__FragmentClient<$Result.GetResult<Prisma.$FragmentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Fragments.
+     * @param {FragmentDeleteManyArgs} args - Arguments to filter Fragments to delete.
+     * @example
+     * // Delete a few Fragments
+     * const { count } = await prisma.fragment.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FragmentDeleteManyArgs>(args?: SelectSubset<T, FragmentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Fragments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FragmentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Fragments
+     * const fragment = await prisma.fragment.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FragmentUpdateManyArgs>(args: SelectSubset<T, FragmentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Fragments and returns the data updated in the database.
+     * @param {FragmentUpdateManyAndReturnArgs} args - Arguments to update many Fragments.
+     * @example
+     * // Update many Fragments
+     * const fragment = await prisma.fragment.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Fragments and only return the `id`
+     * const fragmentWithIdOnly = await prisma.fragment.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FragmentUpdateManyAndReturnArgs>(args: SelectSubset<T, FragmentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FragmentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Fragment.
+     * @param {FragmentUpsertArgs} args - Arguments to update or create a Fragment.
+     * @example
+     * // Update or create a Fragment
+     * const fragment = await prisma.fragment.upsert({
+     *   create: {
+     *     // ... data to create a Fragment
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Fragment we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FragmentUpsertArgs>(args: SelectSubset<T, FragmentUpsertArgs<ExtArgs>>): Prisma__FragmentClient<$Result.GetResult<Prisma.$FragmentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Fragments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FragmentCountArgs} args - Arguments to filter Fragments to count.
+     * @example
+     * // Count the number of Fragments
+     * const count = await prisma.fragment.count({
+     *   where: {
+     *     // ... the filter for the Fragments we want to count
+     *   }
+     * })
+    **/
+    count<T extends FragmentCountArgs>(
+      args?: Subset<T, FragmentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FragmentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Fragment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FragmentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FragmentAggregateArgs>(args: Subset<T, FragmentAggregateArgs>): Prisma.PrismaPromise<GetFragmentAggregateType<T>>
+
+    /**
+     * Group by Fragment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FragmentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FragmentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FragmentGroupByArgs['orderBy'] }
+        : { orderBy?: FragmentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FragmentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFragmentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Fragment model
+   */
+  readonly fields: FragmentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Fragment.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FragmentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    message<T extends MessageDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MessageDefaultArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Fragment model
+   */
+  interface FragmentFieldRefs {
+    readonly id: FieldRef<"Fragment", 'String'>
+    readonly messageId: FieldRef<"Fragment", 'String'>
+    readonly sandboxUrl: FieldRef<"Fragment", 'String'>
+    readonly title: FieldRef<"Fragment", 'String'>
+    readonly files: FieldRef<"Fragment", 'Json'>
+    readonly createdAt: FieldRef<"Fragment", 'DateTime'>
+    readonly updatedAt: FieldRef<"Fragment", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Fragment findUnique
+   */
+  export type FragmentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Fragment
+     */
+    select?: FragmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Fragment
+     */
+    omit?: FragmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FragmentInclude<ExtArgs> | null
+    /**
+     * Filter, which Fragment to fetch.
+     */
+    where: FragmentWhereUniqueInput
+  }
+
+  /**
+   * Fragment findUniqueOrThrow
+   */
+  export type FragmentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Fragment
+     */
+    select?: FragmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Fragment
+     */
+    omit?: FragmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FragmentInclude<ExtArgs> | null
+    /**
+     * Filter, which Fragment to fetch.
+     */
+    where: FragmentWhereUniqueInput
+  }
+
+  /**
+   * Fragment findFirst
+   */
+  export type FragmentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Fragment
+     */
+    select?: FragmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Fragment
+     */
+    omit?: FragmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FragmentInclude<ExtArgs> | null
+    /**
+     * Filter, which Fragment to fetch.
+     */
+    where?: FragmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Fragments to fetch.
+     */
+    orderBy?: FragmentOrderByWithRelationInput | FragmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Fragments.
+     */
+    cursor?: FragmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Fragments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Fragments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Fragments.
+     */
+    distinct?: FragmentScalarFieldEnum | FragmentScalarFieldEnum[]
+  }
+
+  /**
+   * Fragment findFirstOrThrow
+   */
+  export type FragmentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Fragment
+     */
+    select?: FragmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Fragment
+     */
+    omit?: FragmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FragmentInclude<ExtArgs> | null
+    /**
+     * Filter, which Fragment to fetch.
+     */
+    where?: FragmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Fragments to fetch.
+     */
+    orderBy?: FragmentOrderByWithRelationInput | FragmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Fragments.
+     */
+    cursor?: FragmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Fragments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Fragments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Fragments.
+     */
+    distinct?: FragmentScalarFieldEnum | FragmentScalarFieldEnum[]
+  }
+
+  /**
+   * Fragment findMany
+   */
+  export type FragmentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Fragment
+     */
+    select?: FragmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Fragment
+     */
+    omit?: FragmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FragmentInclude<ExtArgs> | null
+    /**
+     * Filter, which Fragments to fetch.
+     */
+    where?: FragmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Fragments to fetch.
+     */
+    orderBy?: FragmentOrderByWithRelationInput | FragmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Fragments.
+     */
+    cursor?: FragmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Fragments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Fragments.
+     */
+    skip?: number
+    distinct?: FragmentScalarFieldEnum | FragmentScalarFieldEnum[]
+  }
+
+  /**
+   * Fragment create
+   */
+  export type FragmentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Fragment
+     */
+    select?: FragmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Fragment
+     */
+    omit?: FragmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FragmentInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Fragment.
+     */
+    data: XOR<FragmentCreateInput, FragmentUncheckedCreateInput>
+  }
+
+  /**
+   * Fragment createMany
+   */
+  export type FragmentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Fragments.
+     */
+    data: FragmentCreateManyInput | FragmentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Fragment createManyAndReturn
+   */
+  export type FragmentCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Fragment
+     */
+    select?: FragmentSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Fragment
+     */
+    omit?: FragmentOmit<ExtArgs> | null
+    /**
+     * The data used to create many Fragments.
+     */
+    data: FragmentCreateManyInput | FragmentCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FragmentIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Fragment update
+   */
+  export type FragmentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Fragment
+     */
+    select?: FragmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Fragment
+     */
+    omit?: FragmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FragmentInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Fragment.
+     */
+    data: XOR<FragmentUpdateInput, FragmentUncheckedUpdateInput>
+    /**
+     * Choose, which Fragment to update.
+     */
+    where: FragmentWhereUniqueInput
+  }
+
+  /**
+   * Fragment updateMany
+   */
+  export type FragmentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Fragments.
+     */
+    data: XOR<FragmentUpdateManyMutationInput, FragmentUncheckedUpdateManyInput>
+    /**
+     * Filter which Fragments to update
+     */
+    where?: FragmentWhereInput
+    /**
+     * Limit how many Fragments to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Fragment updateManyAndReturn
+   */
+  export type FragmentUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Fragment
+     */
+    select?: FragmentSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Fragment
+     */
+    omit?: FragmentOmit<ExtArgs> | null
+    /**
+     * The data used to update Fragments.
+     */
+    data: XOR<FragmentUpdateManyMutationInput, FragmentUncheckedUpdateManyInput>
+    /**
+     * Filter which Fragments to update
+     */
+    where?: FragmentWhereInput
+    /**
+     * Limit how many Fragments to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FragmentIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Fragment upsert
+   */
+  export type FragmentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Fragment
+     */
+    select?: FragmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Fragment
+     */
+    omit?: FragmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FragmentInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Fragment to update in case it exists.
+     */
+    where: FragmentWhereUniqueInput
+    /**
+     * In case the Fragment found by the `where` argument doesn't exist, create a new Fragment with this data.
+     */
+    create: XOR<FragmentCreateInput, FragmentUncheckedCreateInput>
+    /**
+     * In case the Fragment was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FragmentUpdateInput, FragmentUncheckedUpdateInput>
+  }
+
+  /**
+   * Fragment delete
+   */
+  export type FragmentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Fragment
+     */
+    select?: FragmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Fragment
+     */
+    omit?: FragmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FragmentInclude<ExtArgs> | null
+    /**
+     * Filter which Fragment to delete.
+     */
+    where: FragmentWhereUniqueInput
+  }
+
+  /**
+   * Fragment deleteMany
+   */
+  export type FragmentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Fragments to delete
+     */
+    where?: FragmentWhereInput
+    /**
+     * Limit how many Fragments to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Fragment without action
+   */
+  export type FragmentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Fragment
+     */
+    select?: FragmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Fragment
+     */
+    omit?: FragmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FragmentInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Project
    */
 
@@ -1123,6 +3420,7 @@ export namespace Prisma {
   export type ProjectMinAggregateOutputType = {
     id: string | null
     name: string | null
+    userId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1130,6 +3428,7 @@ export namespace Prisma {
   export type ProjectMaxAggregateOutputType = {
     id: string | null
     name: string | null
+    userId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1137,6 +3436,7 @@ export namespace Prisma {
   export type ProjectCountAggregateOutputType = {
     id: number
     name: number
+    userId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -1146,6 +3446,7 @@ export namespace Prisma {
   export type ProjectMinAggregateInputType = {
     id?: true
     name?: true
+    userId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1153,6 +3454,7 @@ export namespace Prisma {
   export type ProjectMaxAggregateInputType = {
     id?: true
     name?: true
+    userId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1160,6 +3462,7 @@ export namespace Prisma {
   export type ProjectCountAggregateInputType = {
     id?: true
     name?: true
+    userId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -1240,6 +3543,7 @@ export namespace Prisma {
   export type ProjectGroupByOutputType = {
     id: string
     name: string
+    userId: string
     createdAt: Date
     updatedAt: Date
     _count: ProjectCountAggregateOutputType | null
@@ -1264,6 +3568,7 @@ export namespace Prisma {
   export type ProjectSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     messages?: boolean | Project$messagesArgs<ExtArgs>
@@ -1273,6 +3578,7 @@ export namespace Prisma {
   export type ProjectSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["project"]>
@@ -1280,6 +3586,7 @@ export namespace Prisma {
   export type ProjectSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["project"]>
@@ -1287,11 +3594,12 @@ export namespace Prisma {
   export type ProjectSelectScalar = {
     id?: boolean
     name?: boolean
+    userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ProjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
+  export type ProjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
   export type ProjectInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     messages?: boolean | Project$messagesArgs<ExtArgs>
     _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
@@ -1307,6 +3615,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
+      userId: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["project"]>
@@ -1735,6 +4044,7 @@ export namespace Prisma {
   interface ProjectFieldRefs {
     readonly id: FieldRef<"Project", 'String'>
     readonly name: FieldRef<"Project", 'String'>
+    readonly userId: FieldRef<"Project", 'String'>
     readonly createdAt: FieldRef<"Project", 'DateTime'>
     readonly updatedAt: FieldRef<"Project", 'DateTime'>
   }
@@ -2168,378 +4478,347 @@ export namespace Prisma {
 
 
   /**
-   * Model Message
+   * Model Usage
    */
 
-  export type AggregateMessage = {
-    _count: MessageCountAggregateOutputType | null
-    _min: MessageMinAggregateOutputType | null
-    _max: MessageMaxAggregateOutputType | null
+  export type AggregateUsage = {
+    _count: UsageCountAggregateOutputType | null
+    _avg: UsageAvgAggregateOutputType | null
+    _sum: UsageSumAggregateOutputType | null
+    _min: UsageMinAggregateOutputType | null
+    _max: UsageMaxAggregateOutputType | null
   }
 
-  export type MessageMinAggregateOutputType = {
-    id: string | null
-    content: string | null
-    role: $Enums.MessageRole | null
-    type: $Enums.MessageType | null
-    createAt: Date | null
-    updatedAt: Date | null
-    projectId: string | null
+  export type UsageAvgAggregateOutputType = {
+    points: number | null
   }
 
-  export type MessageMaxAggregateOutputType = {
-    id: string | null
-    content: string | null
-    role: $Enums.MessageRole | null
-    type: $Enums.MessageType | null
-    createAt: Date | null
-    updatedAt: Date | null
-    projectId: string | null
+  export type UsageSumAggregateOutputType = {
+    points: number | null
   }
 
-  export type MessageCountAggregateOutputType = {
-    id: number
-    content: number
-    role: number
-    type: number
-    createAt: number
-    updatedAt: number
-    projectId: number
+  export type UsageMinAggregateOutputType = {
+    key: string | null
+    points: number | null
+    expire: Date | null
+  }
+
+  export type UsageMaxAggregateOutputType = {
+    key: string | null
+    points: number | null
+    expire: Date | null
+  }
+
+  export type UsageCountAggregateOutputType = {
+    key: number
+    points: number
+    expire: number
     _all: number
   }
 
 
-  export type MessageMinAggregateInputType = {
-    id?: true
-    content?: true
-    role?: true
-    type?: true
-    createAt?: true
-    updatedAt?: true
-    projectId?: true
+  export type UsageAvgAggregateInputType = {
+    points?: true
   }
 
-  export type MessageMaxAggregateInputType = {
-    id?: true
-    content?: true
-    role?: true
-    type?: true
-    createAt?: true
-    updatedAt?: true
-    projectId?: true
+  export type UsageSumAggregateInputType = {
+    points?: true
   }
 
-  export type MessageCountAggregateInputType = {
-    id?: true
-    content?: true
-    role?: true
-    type?: true
-    createAt?: true
-    updatedAt?: true
-    projectId?: true
+  export type UsageMinAggregateInputType = {
+    key?: true
+    points?: true
+    expire?: true
+  }
+
+  export type UsageMaxAggregateInputType = {
+    key?: true
+    points?: true
+    expire?: true
+  }
+
+  export type UsageCountAggregateInputType = {
+    key?: true
+    points?: true
+    expire?: true
     _all?: true
   }
 
-  export type MessageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Message to aggregate.
+     * Filter which Usage to aggregate.
      */
-    where?: MessageWhereInput
+    where?: UsageWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Messages to fetch.
+     * Determine the order of Usages to fetch.
      */
-    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    orderBy?: UsageOrderByWithRelationInput | UsageOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: MessageWhereUniqueInput
+    cursor?: UsageWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Messages from the position of the cursor.
+     * Take `±n` Usages from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Messages.
+     * Skip the first `n` Usages.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Messages
+     * Count returned Usages
     **/
-    _count?: true | MessageCountAggregateInputType
+    _count?: true | UsageCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: UsageAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UsageSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: MessageMinAggregateInputType
+    _min?: UsageMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: MessageMaxAggregateInputType
+    _max?: UsageMaxAggregateInputType
   }
 
-  export type GetMessageAggregateType<T extends MessageAggregateArgs> = {
-        [P in keyof T & keyof AggregateMessage]: P extends '_count' | 'count'
+  export type GetUsageAggregateType<T extends UsageAggregateArgs> = {
+        [P in keyof T & keyof AggregateUsage]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateMessage[P]>
-      : GetScalarType<T[P], AggregateMessage[P]>
+        : GetScalarType<T[P], AggregateUsage[P]>
+      : GetScalarType<T[P], AggregateUsage[P]>
   }
 
 
 
 
-  export type MessageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: MessageWhereInput
-    orderBy?: MessageOrderByWithAggregationInput | MessageOrderByWithAggregationInput[]
-    by: MessageScalarFieldEnum[] | MessageScalarFieldEnum
-    having?: MessageScalarWhereWithAggregatesInput
+  export type UsageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UsageWhereInput
+    orderBy?: UsageOrderByWithAggregationInput | UsageOrderByWithAggregationInput[]
+    by: UsageScalarFieldEnum[] | UsageScalarFieldEnum
+    having?: UsageScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: MessageCountAggregateInputType | true
-    _min?: MessageMinAggregateInputType
-    _max?: MessageMaxAggregateInputType
+    _count?: UsageCountAggregateInputType | true
+    _avg?: UsageAvgAggregateInputType
+    _sum?: UsageSumAggregateInputType
+    _min?: UsageMinAggregateInputType
+    _max?: UsageMaxAggregateInputType
   }
 
-  export type MessageGroupByOutputType = {
-    id: string
-    content: string
-    role: $Enums.MessageRole
-    type: $Enums.MessageType
-    createAt: Date
-    updatedAt: Date
-    projectId: string
-    _count: MessageCountAggregateOutputType | null
-    _min: MessageMinAggregateOutputType | null
-    _max: MessageMaxAggregateOutputType | null
+  export type UsageGroupByOutputType = {
+    key: string
+    points: number
+    expire: Date | null
+    _count: UsageCountAggregateOutputType | null
+    _avg: UsageAvgAggregateOutputType | null
+    _sum: UsageSumAggregateOutputType | null
+    _min: UsageMinAggregateOutputType | null
+    _max: UsageMaxAggregateOutputType | null
   }
 
-  type GetMessageGroupByPayload<T extends MessageGroupByArgs> = Prisma.PrismaPromise<
+  type GetUsageGroupByPayload<T extends UsageGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<MessageGroupByOutputType, T['by']> &
+      PickEnumerable<UsageGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof MessageGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof UsageGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], MessageGroupByOutputType[P]>
-            : GetScalarType<T[P], MessageGroupByOutputType[P]>
+              : GetScalarType<T[P], UsageGroupByOutputType[P]>
+            : GetScalarType<T[P], UsageGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type MessageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    content?: boolean
-    role?: boolean
-    type?: boolean
-    createAt?: boolean
-    updatedAt?: boolean
-    projectId?: boolean
-    project?: boolean | ProjectDefaultArgs<ExtArgs>
-    fragment?: boolean | Message$fragmentArgs<ExtArgs>
-  }, ExtArgs["result"]["message"]>
+  export type UsageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    key?: boolean
+    points?: boolean
+    expire?: boolean
+  }, ExtArgs["result"]["usage"]>
 
-  export type MessageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    content?: boolean
-    role?: boolean
-    type?: boolean
-    createAt?: boolean
-    updatedAt?: boolean
-    projectId?: boolean
-    project?: boolean | ProjectDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["message"]>
+  export type UsageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    key?: boolean
+    points?: boolean
+    expire?: boolean
+  }, ExtArgs["result"]["usage"]>
 
-  export type MessageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    content?: boolean
-    role?: boolean
-    type?: boolean
-    createAt?: boolean
-    updatedAt?: boolean
-    projectId?: boolean
-    project?: boolean | ProjectDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["message"]>
+  export type UsageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    key?: boolean
+    points?: boolean
+    expire?: boolean
+  }, ExtArgs["result"]["usage"]>
 
-  export type MessageSelectScalar = {
-    id?: boolean
-    content?: boolean
-    role?: boolean
-    type?: boolean
-    createAt?: boolean
-    updatedAt?: boolean
-    projectId?: boolean
+  export type UsageSelectScalar = {
+    key?: boolean
+    points?: boolean
+    expire?: boolean
   }
 
-  export type MessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "role" | "type" | "createAt" | "updatedAt" | "projectId", ExtArgs["result"]["message"]>
-  export type MessageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    project?: boolean | ProjectDefaultArgs<ExtArgs>
-    fragment?: boolean | Message$fragmentArgs<ExtArgs>
-  }
-  export type MessageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    project?: boolean | ProjectDefaultArgs<ExtArgs>
-  }
-  export type MessageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    project?: boolean | ProjectDefaultArgs<ExtArgs>
-  }
+  export type UsageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"key" | "points" | "expire", ExtArgs["result"]["usage"]>
 
-  export type $MessagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Message"
-    objects: {
-      project: Prisma.$ProjectPayload<ExtArgs>
-      fragment: Prisma.$FragmentPayload<ExtArgs> | null
-    }
+  export type $UsagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Usage"
+    objects: {}
     scalars: $Extensions.GetPayloadResult<{
-      id: string
-      content: string
-      role: $Enums.MessageRole
-      type: $Enums.MessageType
-      createAt: Date
-      updatedAt: Date
-      projectId: string
-    }, ExtArgs["result"]["message"]>
+      key: string
+      points: number
+      expire: Date | null
+    }, ExtArgs["result"]["usage"]>
     composites: {}
   }
 
-  type MessageGetPayload<S extends boolean | null | undefined | MessageDefaultArgs> = $Result.GetResult<Prisma.$MessagePayload, S>
+  type UsageGetPayload<S extends boolean | null | undefined | UsageDefaultArgs> = $Result.GetResult<Prisma.$UsagePayload, S>
 
-  type MessageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<MessageFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: MessageCountAggregateInputType | true
+  type UsageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UsageFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UsageCountAggregateInputType | true
     }
 
-  export interface MessageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Message'], meta: { name: 'Message' } }
+  export interface UsageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Usage'], meta: { name: 'Usage' } }
     /**
-     * Find zero or one Message that matches the filter.
-     * @param {MessageFindUniqueArgs} args - Arguments to find a Message
+     * Find zero or one Usage that matches the filter.
+     * @param {UsageFindUniqueArgs} args - Arguments to find a Usage
      * @example
-     * // Get one Message
-     * const message = await prisma.message.findUnique({
+     * // Get one Usage
+     * const usage = await prisma.usage.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends MessageFindUniqueArgs>(args: SelectSubset<T, MessageFindUniqueArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends UsageFindUniqueArgs>(args: SelectSubset<T, UsageFindUniqueArgs<ExtArgs>>): Prisma__UsageClient<$Result.GetResult<Prisma.$UsagePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one Message that matches the filter or throw an error with `error.code='P2025'`
+     * Find one Usage that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {MessageFindUniqueOrThrowArgs} args - Arguments to find a Message
+     * @param {UsageFindUniqueOrThrowArgs} args - Arguments to find a Usage
      * @example
-     * // Get one Message
-     * const message = await prisma.message.findUniqueOrThrow({
+     * // Get one Usage
+     * const usage = await prisma.usage.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends MessageFindUniqueOrThrowArgs>(args: SelectSubset<T, MessageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends UsageFindUniqueOrThrowArgs>(args: SelectSubset<T, UsageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UsageClient<$Result.GetResult<Prisma.$UsagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Message that matches the filter.
+     * Find the first Usage that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {MessageFindFirstArgs} args - Arguments to find a Message
+     * @param {UsageFindFirstArgs} args - Arguments to find a Usage
      * @example
-     * // Get one Message
-     * const message = await prisma.message.findFirst({
+     * // Get one Usage
+     * const usage = await prisma.usage.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends MessageFindFirstArgs>(args?: SelectSubset<T, MessageFindFirstArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends UsageFindFirstArgs>(args?: SelectSubset<T, UsageFindFirstArgs<ExtArgs>>): Prisma__UsageClient<$Result.GetResult<Prisma.$UsagePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Message that matches the filter or
+     * Find the first Usage that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {MessageFindFirstOrThrowArgs} args - Arguments to find a Message
+     * @param {UsageFindFirstOrThrowArgs} args - Arguments to find a Usage
      * @example
-     * // Get one Message
-     * const message = await prisma.message.findFirstOrThrow({
+     * // Get one Usage
+     * const usage = await prisma.usage.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends MessageFindFirstOrThrowArgs>(args?: SelectSubset<T, MessageFindFirstOrThrowArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends UsageFindFirstOrThrowArgs>(args?: SelectSubset<T, UsageFindFirstOrThrowArgs<ExtArgs>>): Prisma__UsageClient<$Result.GetResult<Prisma.$UsagePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more Messages that matches the filter.
+     * Find zero or more Usages that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {MessageFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {UsageFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Messages
-     * const messages = await prisma.message.findMany()
+     * // Get all Usages
+     * const usages = await prisma.usage.findMany()
      * 
-     * // Get first 10 Messages
-     * const messages = await prisma.message.findMany({ take: 10 })
+     * // Get first 10 Usages
+     * const usages = await prisma.usage.findMany({ take: 10 })
      * 
-     * // Only select the `id`
-     * const messageWithIdOnly = await prisma.message.findMany({ select: { id: true } })
+     * // Only select the `key`
+     * const usageWithKeyOnly = await prisma.usage.findMany({ select: { key: true } })
      * 
      */
-    findMany<T extends MessageFindManyArgs>(args?: SelectSubset<T, MessageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends UsageFindManyArgs>(args?: SelectSubset<T, UsageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UsagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a Message.
-     * @param {MessageCreateArgs} args - Arguments to create a Message.
+     * Create a Usage.
+     * @param {UsageCreateArgs} args - Arguments to create a Usage.
      * @example
-     * // Create one Message
-     * const Message = await prisma.message.create({
+     * // Create one Usage
+     * const Usage = await prisma.usage.create({
      *   data: {
-     *     // ... data to create a Message
+     *     // ... data to create a Usage
      *   }
      * })
      * 
      */
-    create<T extends MessageCreateArgs>(args: SelectSubset<T, MessageCreateArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends UsageCreateArgs>(args: SelectSubset<T, UsageCreateArgs<ExtArgs>>): Prisma__UsageClient<$Result.GetResult<Prisma.$UsagePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many Messages.
-     * @param {MessageCreateManyArgs} args - Arguments to create many Messages.
+     * Create many Usages.
+     * @param {UsageCreateManyArgs} args - Arguments to create many Usages.
      * @example
-     * // Create many Messages
-     * const message = await prisma.message.createMany({
+     * // Create many Usages
+     * const usage = await prisma.usage.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends MessageCreateManyArgs>(args?: SelectSubset<T, MessageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends UsageCreateManyArgs>(args?: SelectSubset<T, UsageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many Messages and returns the data saved in the database.
-     * @param {MessageCreateManyAndReturnArgs} args - Arguments to create many Messages.
+     * Create many Usages and returns the data saved in the database.
+     * @param {UsageCreateManyAndReturnArgs} args - Arguments to create many Usages.
      * @example
-     * // Create many Messages
-     * const message = await prisma.message.createManyAndReturn({
+     * // Create many Usages
+     * const usage = await prisma.usage.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many Messages and only return the `id`
-     * const messageWithIdOnly = await prisma.message.createManyAndReturn({
-     *   select: { id: true },
+     * // Create many Usages and only return the `key`
+     * const usageWithKeyOnly = await prisma.usage.createManyAndReturn({
+     *   select: { key: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -2548,28 +4827,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends MessageCreateManyAndReturnArgs>(args?: SelectSubset<T, MessageCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends UsageCreateManyAndReturnArgs>(args?: SelectSubset<T, UsageCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UsagePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a Message.
-     * @param {MessageDeleteArgs} args - Arguments to delete one Message.
+     * Delete a Usage.
+     * @param {UsageDeleteArgs} args - Arguments to delete one Usage.
      * @example
-     * // Delete one Message
-     * const Message = await prisma.message.delete({
+     * // Delete one Usage
+     * const Usage = await prisma.usage.delete({
      *   where: {
-     *     // ... filter to delete one Message
+     *     // ... filter to delete one Usage
      *   }
      * })
      * 
      */
-    delete<T extends MessageDeleteArgs>(args: SelectSubset<T, MessageDeleteArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends UsageDeleteArgs>(args: SelectSubset<T, UsageDeleteArgs<ExtArgs>>): Prisma__UsageClient<$Result.GetResult<Prisma.$UsagePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one Message.
-     * @param {MessageUpdateArgs} args - Arguments to update one Message.
+     * Update one Usage.
+     * @param {UsageUpdateArgs} args - Arguments to update one Usage.
      * @example
-     * // Update one Message
-     * const message = await prisma.message.update({
+     * // Update one Usage
+     * const usage = await prisma.usage.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2579,30 +4858,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends MessageUpdateArgs>(args: SelectSubset<T, MessageUpdateArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends UsageUpdateArgs>(args: SelectSubset<T, UsageUpdateArgs<ExtArgs>>): Prisma__UsageClient<$Result.GetResult<Prisma.$UsagePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more Messages.
-     * @param {MessageDeleteManyArgs} args - Arguments to filter Messages to delete.
+     * Delete zero or more Usages.
+     * @param {UsageDeleteManyArgs} args - Arguments to filter Usages to delete.
      * @example
-     * // Delete a few Messages
-     * const { count } = await prisma.message.deleteMany({
+     * // Delete a few Usages
+     * const { count } = await prisma.usage.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends MessageDeleteManyArgs>(args?: SelectSubset<T, MessageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends UsageDeleteManyArgs>(args?: SelectSubset<T, UsageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Messages.
+     * Update zero or more Usages.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {MessageUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {UsageUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Messages
-     * const message = await prisma.message.updateMany({
+     * // Update many Usages
+     * const usage = await prisma.usage.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2612,14 +4891,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends MessageUpdateManyArgs>(args: SelectSubset<T, MessageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends UsageUpdateManyArgs>(args: SelectSubset<T, UsageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Messages and returns the data updated in the database.
-     * @param {MessageUpdateManyAndReturnArgs} args - Arguments to update many Messages.
+     * Update zero or more Usages and returns the data updated in the database.
+     * @param {UsageUpdateManyAndReturnArgs} args - Arguments to update many Usages.
      * @example
-     * // Update many Messages
-     * const message = await prisma.message.updateManyAndReturn({
+     * // Update many Usages
+     * const usage = await prisma.usage.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2628,9 +4907,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Messages and only return the `id`
-     * const messageWithIdOnly = await prisma.message.updateManyAndReturn({
-     *   select: { id: true },
+     * // Update zero or more Usages and only return the `key`
+     * const usageWithKeyOnly = await prisma.usage.updateManyAndReturn({
+     *   select: { key: true },
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2642,56 +4921,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends MessageUpdateManyAndReturnArgs>(args: SelectSubset<T, MessageUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends UsageUpdateManyAndReturnArgs>(args: SelectSubset<T, UsageUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UsagePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one Message.
-     * @param {MessageUpsertArgs} args - Arguments to update or create a Message.
+     * Create or update one Usage.
+     * @param {UsageUpsertArgs} args - Arguments to update or create a Usage.
      * @example
-     * // Update or create a Message
-     * const message = await prisma.message.upsert({
+     * // Update or create a Usage
+     * const usage = await prisma.usage.upsert({
      *   create: {
-     *     // ... data to create a Message
+     *     // ... data to create a Usage
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Message we want to update
+     *     // ... the filter for the Usage we want to update
      *   }
      * })
      */
-    upsert<T extends MessageUpsertArgs>(args: SelectSubset<T, MessageUpsertArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends UsageUpsertArgs>(args: SelectSubset<T, UsageUpsertArgs<ExtArgs>>): Prisma__UsageClient<$Result.GetResult<Prisma.$UsagePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of Messages.
+     * Count the number of Usages.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {MessageCountArgs} args - Arguments to filter Messages to count.
+     * @param {UsageCountArgs} args - Arguments to filter Usages to count.
      * @example
-     * // Count the number of Messages
-     * const count = await prisma.message.count({
+     * // Count the number of Usages
+     * const count = await prisma.usage.count({
      *   where: {
-     *     // ... the filter for the Messages we want to count
+     *     // ... the filter for the Usages we want to count
      *   }
      * })
     **/
-    count<T extends MessageCountArgs>(
-      args?: Subset<T, MessageCountArgs>,
+    count<T extends UsageCountArgs>(
+      args?: Subset<T, UsageCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], MessageCountAggregateOutputType>
+          : GetScalarType<T['select'], UsageCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Message.
+     * Allows you to perform aggregations operations on a Usage.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {MessageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {UsageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -2711,13 +4990,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends MessageAggregateArgs>(args: Subset<T, MessageAggregateArgs>): Prisma.PrismaPromise<GetMessageAggregateType<T>>
+    aggregate<T extends UsageAggregateArgs>(args: Subset<T, UsageAggregateArgs>): Prisma.PrismaPromise<GetUsageAggregateType<T>>
 
     /**
-     * Group by Message.
+     * Group by Usage.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {MessageGroupByArgs} args - Group by arguments.
+     * @param {UsageGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -2732,14 +5011,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends MessageGroupByArgs,
+      T extends UsageGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: MessageGroupByArgs['orderBy'] }
-        : { orderBy?: MessageGroupByArgs['orderBy'] },
+        ? { orderBy: UsageGroupByArgs['orderBy'] }
+        : { orderBy?: UsageGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -2788,23 +5067,21 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, MessageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMessageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, UsageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUsageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the Message model
+   * Fields of the Usage model
    */
-  readonly fields: MessageFieldRefs;
+  readonly fields: UsageFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Message.
+   * The delegate class that acts as a "Promise-like" for Usage.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__MessageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__UsageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    project<T extends ProjectDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProjectDefaultArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    fragment<T extends Message$fragmentArgs<ExtArgs> = {}>(args?: Subset<T, Message$fragmentArgs<ExtArgs>>): Prisma__FragmentClient<$Result.GetResult<Prisma.$FragmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2831,1526 +5108,375 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the Message model
+   * Fields of the Usage model
    */
-  interface MessageFieldRefs {
-    readonly id: FieldRef<"Message", 'String'>
-    readonly content: FieldRef<"Message", 'String'>
-    readonly role: FieldRef<"Message", 'MessageRole'>
-    readonly type: FieldRef<"Message", 'MessageType'>
-    readonly createAt: FieldRef<"Message", 'DateTime'>
-    readonly updatedAt: FieldRef<"Message", 'DateTime'>
-    readonly projectId: FieldRef<"Message", 'String'>
+  interface UsageFieldRefs {
+    readonly key: FieldRef<"Usage", 'String'>
+    readonly points: FieldRef<"Usage", 'Int'>
+    readonly expire: FieldRef<"Usage", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * Message findUnique
+   * Usage findUnique
    */
-  export type MessageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Message
+     * Select specific fields to fetch from the Usage
      */
-    select?: MessageSelect<ExtArgs> | null
+    select?: UsageSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Message
+     * Omit specific fields from the Usage
      */
-    omit?: MessageOmit<ExtArgs> | null
+    omit?: UsageOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * Filter, which Usage to fetch.
      */
-    include?: MessageInclude<ExtArgs> | null
-    /**
-     * Filter, which Message to fetch.
-     */
-    where: MessageWhereUniqueInput
+    where: UsageWhereUniqueInput
   }
 
   /**
-   * Message findUniqueOrThrow
+   * Usage findUniqueOrThrow
    */
-  export type MessageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Message
+     * Select specific fields to fetch from the Usage
      */
-    select?: MessageSelect<ExtArgs> | null
+    select?: UsageSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Message
+     * Omit specific fields from the Usage
      */
-    omit?: MessageOmit<ExtArgs> | null
+    omit?: UsageOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * Filter, which Usage to fetch.
      */
-    include?: MessageInclude<ExtArgs> | null
-    /**
-     * Filter, which Message to fetch.
-     */
-    where: MessageWhereUniqueInput
+    where: UsageWhereUniqueInput
   }
 
   /**
-   * Message findFirst
+   * Usage findFirst
    */
-  export type MessageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Message
+     * Select specific fields to fetch from the Usage
      */
-    select?: MessageSelect<ExtArgs> | null
+    select?: UsageSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Message
+     * Omit specific fields from the Usage
      */
-    omit?: MessageOmit<ExtArgs> | null
+    omit?: UsageOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * Filter, which Usage to fetch.
      */
-    include?: MessageInclude<ExtArgs> | null
-    /**
-     * Filter, which Message to fetch.
-     */
-    where?: MessageWhereInput
+    where?: UsageWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Messages to fetch.
+     * Determine the order of Usages to fetch.
      */
-    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    orderBy?: UsageOrderByWithRelationInput | UsageOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Messages.
+     * Sets the position for searching for Usages.
      */
-    cursor?: MessageWhereUniqueInput
+    cursor?: UsageWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Messages from the position of the cursor.
+     * Take `±n` Usages from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Messages.
+     * Skip the first `n` Usages.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Messages.
+     * Filter by unique combinations of Usages.
      */
-    distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+    distinct?: UsageScalarFieldEnum | UsageScalarFieldEnum[]
   }
 
   /**
-   * Message findFirstOrThrow
+   * Usage findFirstOrThrow
    */
-  export type MessageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Message
+     * Select specific fields to fetch from the Usage
      */
-    select?: MessageSelect<ExtArgs> | null
+    select?: UsageSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Message
+     * Omit specific fields from the Usage
      */
-    omit?: MessageOmit<ExtArgs> | null
+    omit?: UsageOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * Filter, which Usage to fetch.
      */
-    include?: MessageInclude<ExtArgs> | null
-    /**
-     * Filter, which Message to fetch.
-     */
-    where?: MessageWhereInput
+    where?: UsageWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Messages to fetch.
+     * Determine the order of Usages to fetch.
      */
-    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    orderBy?: UsageOrderByWithRelationInput | UsageOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Messages.
+     * Sets the position for searching for Usages.
      */
-    cursor?: MessageWhereUniqueInput
+    cursor?: UsageWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Messages from the position of the cursor.
+     * Take `±n` Usages from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Messages.
+     * Skip the first `n` Usages.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Messages.
+     * Filter by unique combinations of Usages.
      */
-    distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+    distinct?: UsageScalarFieldEnum | UsageScalarFieldEnum[]
   }
 
   /**
-   * Message findMany
+   * Usage findMany
    */
-  export type MessageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Message
+     * Select specific fields to fetch from the Usage
      */
-    select?: MessageSelect<ExtArgs> | null
+    select?: UsageSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Message
+     * Omit specific fields from the Usage
      */
-    omit?: MessageOmit<ExtArgs> | null
+    omit?: UsageOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * Filter, which Usages to fetch.
      */
-    include?: MessageInclude<ExtArgs> | null
-    /**
-     * Filter, which Messages to fetch.
-     */
-    where?: MessageWhereInput
+    where?: UsageWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Messages to fetch.
+     * Determine the order of Usages to fetch.
      */
-    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    orderBy?: UsageOrderByWithRelationInput | UsageOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Messages.
+     * Sets the position for listing Usages.
      */
-    cursor?: MessageWhereUniqueInput
+    cursor?: UsageWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Messages from the position of the cursor.
+     * Take `±n` Usages from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Messages.
+     * Skip the first `n` Usages.
      */
     skip?: number
-    distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+    distinct?: UsageScalarFieldEnum | UsageScalarFieldEnum[]
   }
 
   /**
-   * Message create
+   * Usage create
    */
-  export type MessageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Message
+     * Select specific fields to fetch from the Usage
      */
-    select?: MessageSelect<ExtArgs> | null
+    select?: UsageSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Message
+     * Omit specific fields from the Usage
      */
-    omit?: MessageOmit<ExtArgs> | null
+    omit?: UsageOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * The data needed to create a Usage.
      */
-    include?: MessageInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Message.
-     */
-    data: XOR<MessageCreateInput, MessageUncheckedCreateInput>
+    data: XOR<UsageCreateInput, UsageUncheckedCreateInput>
   }
 
   /**
-   * Message createMany
+   * Usage createMany
    */
-  export type MessageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many Messages.
+     * The data used to create many Usages.
      */
-    data: MessageCreateManyInput | MessageCreateManyInput[]
+    data: UsageCreateManyInput | UsageCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * Message createManyAndReturn
+   * Usage createManyAndReturn
    */
-  export type MessageCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsageCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Message
+     * Select specific fields to fetch from the Usage
      */
-    select?: MessageSelectCreateManyAndReturn<ExtArgs> | null
+    select?: UsageSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Message
+     * Omit specific fields from the Usage
      */
-    omit?: MessageOmit<ExtArgs> | null
+    omit?: UsageOmit<ExtArgs> | null
     /**
-     * The data used to create many Messages.
+     * The data used to create many Usages.
      */
-    data: MessageCreateManyInput | MessageCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MessageIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Message update
-   */
-  export type MessageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Message
-     */
-    select?: MessageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Message
-     */
-    omit?: MessageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MessageInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Message.
-     */
-    data: XOR<MessageUpdateInput, MessageUncheckedUpdateInput>
-    /**
-     * Choose, which Message to update.
-     */
-    where: MessageWhereUniqueInput
-  }
-
-  /**
-   * Message updateMany
-   */
-  export type MessageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Messages.
-     */
-    data: XOR<MessageUpdateManyMutationInput, MessageUncheckedUpdateManyInput>
-    /**
-     * Filter which Messages to update
-     */
-    where?: MessageWhereInput
-    /**
-     * Limit how many Messages to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Message updateManyAndReturn
-   */
-  export type MessageUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Message
-     */
-    select?: MessageSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Message
-     */
-    omit?: MessageOmit<ExtArgs> | null
-    /**
-     * The data used to update Messages.
-     */
-    data: XOR<MessageUpdateManyMutationInput, MessageUncheckedUpdateManyInput>
-    /**
-     * Filter which Messages to update
-     */
-    where?: MessageWhereInput
-    /**
-     * Limit how many Messages to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MessageIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Message upsert
-   */
-  export type MessageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Message
-     */
-    select?: MessageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Message
-     */
-    omit?: MessageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MessageInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Message to update in case it exists.
-     */
-    where: MessageWhereUniqueInput
-    /**
-     * In case the Message found by the `where` argument doesn't exist, create a new Message with this data.
-     */
-    create: XOR<MessageCreateInput, MessageUncheckedCreateInput>
-    /**
-     * In case the Message was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<MessageUpdateInput, MessageUncheckedUpdateInput>
-  }
-
-  /**
-   * Message delete
-   */
-  export type MessageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Message
-     */
-    select?: MessageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Message
-     */
-    omit?: MessageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MessageInclude<ExtArgs> | null
-    /**
-     * Filter which Message to delete.
-     */
-    where: MessageWhereUniqueInput
-  }
-
-  /**
-   * Message deleteMany
-   */
-  export type MessageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Messages to delete
-     */
-    where?: MessageWhereInput
-    /**
-     * Limit how many Messages to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Message.fragment
-   */
-  export type Message$fragmentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Fragment
-     */
-    select?: FragmentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Fragment
-     */
-    omit?: FragmentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: FragmentInclude<ExtArgs> | null
-    where?: FragmentWhereInput
-  }
-
-  /**
-   * Message without action
-   */
-  export type MessageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Message
-     */
-    select?: MessageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Message
-     */
-    omit?: MessageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MessageInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model Fragment
-   */
-
-  export type AggregateFragment = {
-    _count: FragmentCountAggregateOutputType | null
-    _min: FragmentMinAggregateOutputType | null
-    _max: FragmentMaxAggregateOutputType | null
-  }
-
-  export type FragmentMinAggregateOutputType = {
-    id: string | null
-    messageId: string | null
-    sandboxUrl: string | null
-    title: string | null
-    createAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type FragmentMaxAggregateOutputType = {
-    id: string | null
-    messageId: string | null
-    sandboxUrl: string | null
-    title: string | null
-    createAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type FragmentCountAggregateOutputType = {
-    id: number
-    messageId: number
-    sandboxUrl: number
-    title: number
-    files: number
-    createAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type FragmentMinAggregateInputType = {
-    id?: true
-    messageId?: true
-    sandboxUrl?: true
-    title?: true
-    createAt?: true
-    updatedAt?: true
-  }
-
-  export type FragmentMaxAggregateInputType = {
-    id?: true
-    messageId?: true
-    sandboxUrl?: true
-    title?: true
-    createAt?: true
-    updatedAt?: true
-  }
-
-  export type FragmentCountAggregateInputType = {
-    id?: true
-    messageId?: true
-    sandboxUrl?: true
-    title?: true
-    files?: true
-    createAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type FragmentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Fragment to aggregate.
-     */
-    where?: FragmentWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Fragments to fetch.
-     */
-    orderBy?: FragmentOrderByWithRelationInput | FragmentOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: FragmentWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Fragments from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Fragments.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Fragments
-    **/
-    _count?: true | FragmentCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: FragmentMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: FragmentMaxAggregateInputType
-  }
-
-  export type GetFragmentAggregateType<T extends FragmentAggregateArgs> = {
-        [P in keyof T & keyof AggregateFragment]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateFragment[P]>
-      : GetScalarType<T[P], AggregateFragment[P]>
-  }
-
-
-
-
-  export type FragmentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: FragmentWhereInput
-    orderBy?: FragmentOrderByWithAggregationInput | FragmentOrderByWithAggregationInput[]
-    by: FragmentScalarFieldEnum[] | FragmentScalarFieldEnum
-    having?: FragmentScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: FragmentCountAggregateInputType | true
-    _min?: FragmentMinAggregateInputType
-    _max?: FragmentMaxAggregateInputType
-  }
-
-  export type FragmentGroupByOutputType = {
-    id: string
-    messageId: string
-    sandboxUrl: string
-    title: string
-    files: JsonValue
-    createAt: Date
-    updatedAt: Date
-    _count: FragmentCountAggregateOutputType | null
-    _min: FragmentMinAggregateOutputType | null
-    _max: FragmentMaxAggregateOutputType | null
-  }
-
-  type GetFragmentGroupByPayload<T extends FragmentGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<FragmentGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof FragmentGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], FragmentGroupByOutputType[P]>
-            : GetScalarType<T[P], FragmentGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type FragmentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    messageId?: boolean
-    sandboxUrl?: boolean
-    title?: boolean
-    files?: boolean
-    createAt?: boolean
-    updatedAt?: boolean
-    message?: boolean | MessageDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["fragment"]>
-
-  export type FragmentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    messageId?: boolean
-    sandboxUrl?: boolean
-    title?: boolean
-    files?: boolean
-    createAt?: boolean
-    updatedAt?: boolean
-    message?: boolean | MessageDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["fragment"]>
-
-  export type FragmentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    messageId?: boolean
-    sandboxUrl?: boolean
-    title?: boolean
-    files?: boolean
-    createAt?: boolean
-    updatedAt?: boolean
-    message?: boolean | MessageDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["fragment"]>
-
-  export type FragmentSelectScalar = {
-    id?: boolean
-    messageId?: boolean
-    sandboxUrl?: boolean
-    title?: boolean
-    files?: boolean
-    createAt?: boolean
-    updatedAt?: boolean
-  }
-
-  export type FragmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "messageId" | "sandboxUrl" | "title" | "files" | "createAt" | "updatedAt", ExtArgs["result"]["fragment"]>
-  export type FragmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    message?: boolean | MessageDefaultArgs<ExtArgs>
-  }
-  export type FragmentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    message?: boolean | MessageDefaultArgs<ExtArgs>
-  }
-  export type FragmentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    message?: boolean | MessageDefaultArgs<ExtArgs>
-  }
-
-  export type $FragmentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Fragment"
-    objects: {
-      message: Prisma.$MessagePayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      messageId: string
-      sandboxUrl: string
-      title: string
-      files: Prisma.JsonValue
-      createAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["fragment"]>
-    composites: {}
-  }
-
-  type FragmentGetPayload<S extends boolean | null | undefined | FragmentDefaultArgs> = $Result.GetResult<Prisma.$FragmentPayload, S>
-
-  type FragmentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<FragmentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: FragmentCountAggregateInputType | true
-    }
-
-  export interface FragmentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Fragment'], meta: { name: 'Fragment' } }
-    /**
-     * Find zero or one Fragment that matches the filter.
-     * @param {FragmentFindUniqueArgs} args - Arguments to find a Fragment
-     * @example
-     * // Get one Fragment
-     * const fragment = await prisma.fragment.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends FragmentFindUniqueArgs>(args: SelectSubset<T, FragmentFindUniqueArgs<ExtArgs>>): Prisma__FragmentClient<$Result.GetResult<Prisma.$FragmentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Fragment that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {FragmentFindUniqueOrThrowArgs} args - Arguments to find a Fragment
-     * @example
-     * // Get one Fragment
-     * const fragment = await prisma.fragment.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends FragmentFindUniqueOrThrowArgs>(args: SelectSubset<T, FragmentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FragmentClient<$Result.GetResult<Prisma.$FragmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Fragment that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {FragmentFindFirstArgs} args - Arguments to find a Fragment
-     * @example
-     * // Get one Fragment
-     * const fragment = await prisma.fragment.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends FragmentFindFirstArgs>(args?: SelectSubset<T, FragmentFindFirstArgs<ExtArgs>>): Prisma__FragmentClient<$Result.GetResult<Prisma.$FragmentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Fragment that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {FragmentFindFirstOrThrowArgs} args - Arguments to find a Fragment
-     * @example
-     * // Get one Fragment
-     * const fragment = await prisma.fragment.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends FragmentFindFirstOrThrowArgs>(args?: SelectSubset<T, FragmentFindFirstOrThrowArgs<ExtArgs>>): Prisma__FragmentClient<$Result.GetResult<Prisma.$FragmentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Fragments that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {FragmentFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Fragments
-     * const fragments = await prisma.fragment.findMany()
-     * 
-     * // Get first 10 Fragments
-     * const fragments = await prisma.fragment.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const fragmentWithIdOnly = await prisma.fragment.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends FragmentFindManyArgs>(args?: SelectSubset<T, FragmentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FragmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Fragment.
-     * @param {FragmentCreateArgs} args - Arguments to create a Fragment.
-     * @example
-     * // Create one Fragment
-     * const Fragment = await prisma.fragment.create({
-     *   data: {
-     *     // ... data to create a Fragment
-     *   }
-     * })
-     * 
-     */
-    create<T extends FragmentCreateArgs>(args: SelectSubset<T, FragmentCreateArgs<ExtArgs>>): Prisma__FragmentClient<$Result.GetResult<Prisma.$FragmentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Fragments.
-     * @param {FragmentCreateManyArgs} args - Arguments to create many Fragments.
-     * @example
-     * // Create many Fragments
-     * const fragment = await prisma.fragment.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends FragmentCreateManyArgs>(args?: SelectSubset<T, FragmentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Fragments and returns the data saved in the database.
-     * @param {FragmentCreateManyAndReturnArgs} args - Arguments to create many Fragments.
-     * @example
-     * // Create many Fragments
-     * const fragment = await prisma.fragment.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Fragments and only return the `id`
-     * const fragmentWithIdOnly = await prisma.fragment.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends FragmentCreateManyAndReturnArgs>(args?: SelectSubset<T, FragmentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FragmentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Fragment.
-     * @param {FragmentDeleteArgs} args - Arguments to delete one Fragment.
-     * @example
-     * // Delete one Fragment
-     * const Fragment = await prisma.fragment.delete({
-     *   where: {
-     *     // ... filter to delete one Fragment
-     *   }
-     * })
-     * 
-     */
-    delete<T extends FragmentDeleteArgs>(args: SelectSubset<T, FragmentDeleteArgs<ExtArgs>>): Prisma__FragmentClient<$Result.GetResult<Prisma.$FragmentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Fragment.
-     * @param {FragmentUpdateArgs} args - Arguments to update one Fragment.
-     * @example
-     * // Update one Fragment
-     * const fragment = await prisma.fragment.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends FragmentUpdateArgs>(args: SelectSubset<T, FragmentUpdateArgs<ExtArgs>>): Prisma__FragmentClient<$Result.GetResult<Prisma.$FragmentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Fragments.
-     * @param {FragmentDeleteManyArgs} args - Arguments to filter Fragments to delete.
-     * @example
-     * // Delete a few Fragments
-     * const { count } = await prisma.fragment.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends FragmentDeleteManyArgs>(args?: SelectSubset<T, FragmentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Fragments.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {FragmentUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Fragments
-     * const fragment = await prisma.fragment.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends FragmentUpdateManyArgs>(args: SelectSubset<T, FragmentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Fragments and returns the data updated in the database.
-     * @param {FragmentUpdateManyAndReturnArgs} args - Arguments to update many Fragments.
-     * @example
-     * // Update many Fragments
-     * const fragment = await prisma.fragment.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Fragments and only return the `id`
-     * const fragmentWithIdOnly = await prisma.fragment.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends FragmentUpdateManyAndReturnArgs>(args: SelectSubset<T, FragmentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FragmentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Fragment.
-     * @param {FragmentUpsertArgs} args - Arguments to update or create a Fragment.
-     * @example
-     * // Update or create a Fragment
-     * const fragment = await prisma.fragment.upsert({
-     *   create: {
-     *     // ... data to create a Fragment
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Fragment we want to update
-     *   }
-     * })
-     */
-    upsert<T extends FragmentUpsertArgs>(args: SelectSubset<T, FragmentUpsertArgs<ExtArgs>>): Prisma__FragmentClient<$Result.GetResult<Prisma.$FragmentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Fragments.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {FragmentCountArgs} args - Arguments to filter Fragments to count.
-     * @example
-     * // Count the number of Fragments
-     * const count = await prisma.fragment.count({
-     *   where: {
-     *     // ... the filter for the Fragments we want to count
-     *   }
-     * })
-    **/
-    count<T extends FragmentCountArgs>(
-      args?: Subset<T, FragmentCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], FragmentCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Fragment.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {FragmentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends FragmentAggregateArgs>(args: Subset<T, FragmentAggregateArgs>): Prisma.PrismaPromise<GetFragmentAggregateType<T>>
-
-    /**
-     * Group by Fragment.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {FragmentGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends FragmentGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: FragmentGroupByArgs['orderBy'] }
-        : { orderBy?: FragmentGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, FragmentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFragmentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Fragment model
-   */
-  readonly fields: FragmentFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Fragment.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__FragmentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    message<T extends MessageDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MessageDefaultArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Fragment model
-   */
-  interface FragmentFieldRefs {
-    readonly id: FieldRef<"Fragment", 'String'>
-    readonly messageId: FieldRef<"Fragment", 'String'>
-    readonly sandboxUrl: FieldRef<"Fragment", 'String'>
-    readonly title: FieldRef<"Fragment", 'String'>
-    readonly files: FieldRef<"Fragment", 'Json'>
-    readonly createAt: FieldRef<"Fragment", 'DateTime'>
-    readonly updatedAt: FieldRef<"Fragment", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Fragment findUnique
-   */
-  export type FragmentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Fragment
-     */
-    select?: FragmentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Fragment
-     */
-    omit?: FragmentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: FragmentInclude<ExtArgs> | null
-    /**
-     * Filter, which Fragment to fetch.
-     */
-    where: FragmentWhereUniqueInput
-  }
-
-  /**
-   * Fragment findUniqueOrThrow
-   */
-  export type FragmentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Fragment
-     */
-    select?: FragmentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Fragment
-     */
-    omit?: FragmentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: FragmentInclude<ExtArgs> | null
-    /**
-     * Filter, which Fragment to fetch.
-     */
-    where: FragmentWhereUniqueInput
-  }
-
-  /**
-   * Fragment findFirst
-   */
-  export type FragmentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Fragment
-     */
-    select?: FragmentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Fragment
-     */
-    omit?: FragmentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: FragmentInclude<ExtArgs> | null
-    /**
-     * Filter, which Fragment to fetch.
-     */
-    where?: FragmentWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Fragments to fetch.
-     */
-    orderBy?: FragmentOrderByWithRelationInput | FragmentOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Fragments.
-     */
-    cursor?: FragmentWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Fragments from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Fragments.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Fragments.
-     */
-    distinct?: FragmentScalarFieldEnum | FragmentScalarFieldEnum[]
-  }
-
-  /**
-   * Fragment findFirstOrThrow
-   */
-  export type FragmentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Fragment
-     */
-    select?: FragmentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Fragment
-     */
-    omit?: FragmentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: FragmentInclude<ExtArgs> | null
-    /**
-     * Filter, which Fragment to fetch.
-     */
-    where?: FragmentWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Fragments to fetch.
-     */
-    orderBy?: FragmentOrderByWithRelationInput | FragmentOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Fragments.
-     */
-    cursor?: FragmentWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Fragments from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Fragments.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Fragments.
-     */
-    distinct?: FragmentScalarFieldEnum | FragmentScalarFieldEnum[]
-  }
-
-  /**
-   * Fragment findMany
-   */
-  export type FragmentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Fragment
-     */
-    select?: FragmentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Fragment
-     */
-    omit?: FragmentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: FragmentInclude<ExtArgs> | null
-    /**
-     * Filter, which Fragments to fetch.
-     */
-    where?: FragmentWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Fragments to fetch.
-     */
-    orderBy?: FragmentOrderByWithRelationInput | FragmentOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Fragments.
-     */
-    cursor?: FragmentWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Fragments from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Fragments.
-     */
-    skip?: number
-    distinct?: FragmentScalarFieldEnum | FragmentScalarFieldEnum[]
-  }
-
-  /**
-   * Fragment create
-   */
-  export type FragmentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Fragment
-     */
-    select?: FragmentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Fragment
-     */
-    omit?: FragmentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: FragmentInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Fragment.
-     */
-    data: XOR<FragmentCreateInput, FragmentUncheckedCreateInput>
-  }
-
-  /**
-   * Fragment createMany
-   */
-  export type FragmentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Fragments.
-     */
-    data: FragmentCreateManyInput | FragmentCreateManyInput[]
+    data: UsageCreateManyInput | UsageCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * Fragment createManyAndReturn
+   * Usage update
    */
-  export type FragmentCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Fragment
+     * Select specific fields to fetch from the Usage
      */
-    select?: FragmentSelectCreateManyAndReturn<ExtArgs> | null
+    select?: UsageSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Fragment
+     * Omit specific fields from the Usage
      */
-    omit?: FragmentOmit<ExtArgs> | null
+    omit?: UsageOmit<ExtArgs> | null
     /**
-     * The data used to create many Fragments.
+     * The data needed to update a Usage.
      */
-    data: FragmentCreateManyInput | FragmentCreateManyInput[]
-    skipDuplicates?: boolean
+    data: XOR<UsageUpdateInput, UsageUncheckedUpdateInput>
     /**
-     * Choose, which related nodes to fetch as well
+     * Choose, which Usage to update.
      */
-    include?: FragmentIncludeCreateManyAndReturn<ExtArgs> | null
+    where: UsageWhereUniqueInput
   }
 
   /**
-   * Fragment update
+   * Usage updateMany
    */
-  export type FragmentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Fragment
+     * The data used to update Usages.
      */
-    select?: FragmentSelect<ExtArgs> | null
+    data: XOR<UsageUpdateManyMutationInput, UsageUncheckedUpdateManyInput>
     /**
-     * Omit specific fields from the Fragment
+     * Filter which Usages to update
      */
-    omit?: FragmentOmit<ExtArgs> | null
+    where?: UsageWhereInput
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: FragmentInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Fragment.
-     */
-    data: XOR<FragmentUpdateInput, FragmentUncheckedUpdateInput>
-    /**
-     * Choose, which Fragment to update.
-     */
-    where: FragmentWhereUniqueInput
-  }
-
-  /**
-   * Fragment updateMany
-   */
-  export type FragmentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Fragments.
-     */
-    data: XOR<FragmentUpdateManyMutationInput, FragmentUncheckedUpdateManyInput>
-    /**
-     * Filter which Fragments to update
-     */
-    where?: FragmentWhereInput
-    /**
-     * Limit how many Fragments to update.
+     * Limit how many Usages to update.
      */
     limit?: number
   }
 
   /**
-   * Fragment updateManyAndReturn
+   * Usage updateManyAndReturn
    */
-  export type FragmentUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsageUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Fragment
+     * Select specific fields to fetch from the Usage
      */
-    select?: FragmentSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: UsageSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Fragment
+     * Omit specific fields from the Usage
      */
-    omit?: FragmentOmit<ExtArgs> | null
+    omit?: UsageOmit<ExtArgs> | null
     /**
-     * The data used to update Fragments.
+     * The data used to update Usages.
      */
-    data: XOR<FragmentUpdateManyMutationInput, FragmentUncheckedUpdateManyInput>
+    data: XOR<UsageUpdateManyMutationInput, UsageUncheckedUpdateManyInput>
     /**
-     * Filter which Fragments to update
+     * Filter which Usages to update
      */
-    where?: FragmentWhereInput
+    where?: UsageWhereInput
     /**
-     * Limit how many Fragments to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: FragmentIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Fragment upsert
-   */
-  export type FragmentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Fragment
-     */
-    select?: FragmentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Fragment
-     */
-    omit?: FragmentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: FragmentInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Fragment to update in case it exists.
-     */
-    where: FragmentWhereUniqueInput
-    /**
-     * In case the Fragment found by the `where` argument doesn't exist, create a new Fragment with this data.
-     */
-    create: XOR<FragmentCreateInput, FragmentUncheckedCreateInput>
-    /**
-     * In case the Fragment was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<FragmentUpdateInput, FragmentUncheckedUpdateInput>
-  }
-
-  /**
-   * Fragment delete
-   */
-  export type FragmentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Fragment
-     */
-    select?: FragmentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Fragment
-     */
-    omit?: FragmentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: FragmentInclude<ExtArgs> | null
-    /**
-     * Filter which Fragment to delete.
-     */
-    where: FragmentWhereUniqueInput
-  }
-
-  /**
-   * Fragment deleteMany
-   */
-  export type FragmentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Fragments to delete
-     */
-    where?: FragmentWhereInput
-    /**
-     * Limit how many Fragments to delete.
+     * Limit how many Usages to update.
      */
     limit?: number
   }
 
   /**
-   * Fragment without action
+   * Usage upsert
    */
-  export type FragmentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Fragment
+     * Select specific fields to fetch from the Usage
      */
-    select?: FragmentSelect<ExtArgs> | null
+    select?: UsageSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Fragment
+     * Omit specific fields from the Usage
      */
-    omit?: FragmentOmit<ExtArgs> | null
+    omit?: UsageOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * The filter to search for the Usage to update in case it exists.
      */
-    include?: FragmentInclude<ExtArgs> | null
+    where: UsageWhereUniqueInput
+    /**
+     * In case the Usage found by the `where` argument doesn't exist, create a new Usage with this data.
+     */
+    create: XOR<UsageCreateInput, UsageUncheckedCreateInput>
+    /**
+     * In case the Usage was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UsageUpdateInput, UsageUncheckedUpdateInput>
+  }
+
+  /**
+   * Usage delete
+   */
+  export type UsageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Usage
+     */
+    select?: UsageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Usage
+     */
+    omit?: UsageOmit<ExtArgs> | null
+    /**
+     * Filter which Usage to delete.
+     */
+    where: UsageWhereUniqueInput
+  }
+
+  /**
+   * Usage deleteMany
+   */
+  export type UsageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Usages to delete
+     */
+    where?: UsageWhereInput
+    /**
+     * Limit how many Usages to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Usage without action
+   */
+  export type UsageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Usage
+     */
+    select?: UsageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Usage
+     */
+    omit?: UsageOmit<ExtArgs> | null
   }
 
 
@@ -4368,22 +5494,12 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-  export const ProjectScalarFieldEnum: {
-    id: 'id',
-    name: 'name',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
-
-
   export const MessageScalarFieldEnum: {
     id: 'id',
     content: 'content',
     role: 'role',
     type: 'type',
-    createAt: 'createAt',
+    createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     projectId: 'projectId'
   };
@@ -4397,11 +5513,31 @@ export namespace Prisma {
     sandboxUrl: 'sandboxUrl',
     title: 'title',
     files: 'files',
-    createAt: 'createAt',
+    createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
   export type FragmentScalarFieldEnum = (typeof FragmentScalarFieldEnum)[keyof typeof FragmentScalarFieldEnum]
+
+
+  export const ProjectScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
+
+
+  export const UsageScalarFieldEnum: {
+    key: 'key',
+    points: 'points',
+    expire: 'expire'
+  };
+
+  export type UsageScalarFieldEnum = (typeof UsageScalarFieldEnum)[keyof typeof UsageScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -4436,6 +5572,14 @@ export namespace Prisma {
   export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
   /**
    * Field references
    */
@@ -4452,20 +5596,6 @@ export namespace Prisma {
    * Reference to a field of type 'String[]'
    */
   export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'DateTime'
-   */
-  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
-    
-
-
-  /**
-   * Reference to a field of type 'DateTime[]'
-   */
-  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
     
 
 
@@ -4498,6 +5628,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime[]'
+   */
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Json'
    */
   export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
@@ -4523,60 +5667,24 @@ export namespace Prisma {
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
   /**
    * Deep Input Types
    */
 
-
-  export type ProjectWhereInput = {
-    AND?: ProjectWhereInput | ProjectWhereInput[]
-    OR?: ProjectWhereInput[]
-    NOT?: ProjectWhereInput | ProjectWhereInput[]
-    id?: StringFilter<"Project"> | string
-    name?: StringFilter<"Project"> | string
-    createdAt?: DateTimeFilter<"Project"> | Date | string
-    updatedAt?: DateTimeFilter<"Project"> | Date | string
-    messages?: MessageListRelationFilter
-  }
-
-  export type ProjectOrderByWithRelationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    messages?: MessageOrderByRelationAggregateInput
-  }
-
-  export type ProjectWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: ProjectWhereInput | ProjectWhereInput[]
-    OR?: ProjectWhereInput[]
-    NOT?: ProjectWhereInput | ProjectWhereInput[]
-    name?: StringFilter<"Project"> | string
-    createdAt?: DateTimeFilter<"Project"> | Date | string
-    updatedAt?: DateTimeFilter<"Project"> | Date | string
-    messages?: MessageListRelationFilter
-  }, "id">
-
-  export type ProjectOrderByWithAggregationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: ProjectCountOrderByAggregateInput
-    _max?: ProjectMaxOrderByAggregateInput
-    _min?: ProjectMinOrderByAggregateInput
-  }
-
-  export type ProjectScalarWhereWithAggregatesInput = {
-    AND?: ProjectScalarWhereWithAggregatesInput | ProjectScalarWhereWithAggregatesInput[]
-    OR?: ProjectScalarWhereWithAggregatesInput[]
-    NOT?: ProjectScalarWhereWithAggregatesInput | ProjectScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Project"> | string
-    name?: StringWithAggregatesFilter<"Project"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"Project"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Project"> | Date | string
-  }
 
   export type MessageWhereInput = {
     AND?: MessageWhereInput | MessageWhereInput[]
@@ -4586,11 +5694,11 @@ export namespace Prisma {
     content?: StringFilter<"Message"> | string
     role?: EnumMessageRoleFilter<"Message"> | $Enums.MessageRole
     type?: EnumMessageTypeFilter<"Message"> | $Enums.MessageType
-    createAt?: DateTimeFilter<"Message"> | Date | string
+    createdAt?: DateTimeFilter<"Message"> | Date | string
     updatedAt?: DateTimeFilter<"Message"> | Date | string
     projectId?: StringFilter<"Message"> | string
-    project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
     fragment?: XOR<FragmentNullableScalarRelationFilter, FragmentWhereInput> | null
+    project?: XOR<ProjectNullableScalarRelationFilter, ProjectWhereInput> | null
   }
 
   export type MessageOrderByWithRelationInput = {
@@ -4598,11 +5706,11 @@ export namespace Prisma {
     content?: SortOrder
     role?: SortOrder
     type?: SortOrder
-    createAt?: SortOrder
+    createdAt?: SortOrder
     updatedAt?: SortOrder
     projectId?: SortOrder
-    project?: ProjectOrderByWithRelationInput
     fragment?: FragmentOrderByWithRelationInput
+    project?: ProjectOrderByWithRelationInput
   }
 
   export type MessageWhereUniqueInput = Prisma.AtLeast<{
@@ -4613,11 +5721,11 @@ export namespace Prisma {
     content?: StringFilter<"Message"> | string
     role?: EnumMessageRoleFilter<"Message"> | $Enums.MessageRole
     type?: EnumMessageTypeFilter<"Message"> | $Enums.MessageType
-    createAt?: DateTimeFilter<"Message"> | Date | string
+    createdAt?: DateTimeFilter<"Message"> | Date | string
     updatedAt?: DateTimeFilter<"Message"> | Date | string
     projectId?: StringFilter<"Message"> | string
-    project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
     fragment?: XOR<FragmentNullableScalarRelationFilter, FragmentWhereInput> | null
+    project?: XOR<ProjectNullableScalarRelationFilter, ProjectWhereInput> | null
   }, "id">
 
   export type MessageOrderByWithAggregationInput = {
@@ -4625,7 +5733,7 @@ export namespace Prisma {
     content?: SortOrder
     role?: SortOrder
     type?: SortOrder
-    createAt?: SortOrder
+    createdAt?: SortOrder
     updatedAt?: SortOrder
     projectId?: SortOrder
     _count?: MessageCountOrderByAggregateInput
@@ -4641,7 +5749,7 @@ export namespace Prisma {
     content?: StringWithAggregatesFilter<"Message"> | string
     role?: EnumMessageRoleWithAggregatesFilter<"Message"> | $Enums.MessageRole
     type?: EnumMessageTypeWithAggregatesFilter<"Message"> | $Enums.MessageType
-    createAt?: DateTimeWithAggregatesFilter<"Message"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"Message"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Message"> | Date | string
     projectId?: StringWithAggregatesFilter<"Message"> | string
   }
@@ -4655,7 +5763,7 @@ export namespace Prisma {
     sandboxUrl?: StringFilter<"Fragment"> | string
     title?: StringFilter<"Fragment"> | string
     files?: JsonFilter<"Fragment">
-    createAt?: DateTimeFilter<"Fragment"> | Date | string
+    createdAt?: DateTimeFilter<"Fragment"> | Date | string
     updatedAt?: DateTimeFilter<"Fragment"> | Date | string
     message?: XOR<MessageScalarRelationFilter, MessageWhereInput>
   }
@@ -4666,7 +5774,7 @@ export namespace Prisma {
     sandboxUrl?: SortOrder
     title?: SortOrder
     files?: SortOrder
-    createAt?: SortOrder
+    createdAt?: SortOrder
     updatedAt?: SortOrder
     message?: MessageOrderByWithRelationInput
   }
@@ -4680,7 +5788,7 @@ export namespace Prisma {
     sandboxUrl?: StringFilter<"Fragment"> | string
     title?: StringFilter<"Fragment"> | string
     files?: JsonFilter<"Fragment">
-    createAt?: DateTimeFilter<"Fragment"> | Date | string
+    createdAt?: DateTimeFilter<"Fragment"> | Date | string
     updatedAt?: DateTimeFilter<"Fragment"> | Date | string
     message?: XOR<MessageScalarRelationFilter, MessageWhereInput>
   }, "id" | "messageId">
@@ -4691,7 +5799,7 @@ export namespace Prisma {
     sandboxUrl?: SortOrder
     title?: SortOrder
     files?: SortOrder
-    createAt?: SortOrder
+    createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: FragmentCountOrderByAggregateInput
     _max?: FragmentMaxOrderByAggregateInput
@@ -4707,61 +5815,107 @@ export namespace Prisma {
     sandboxUrl?: StringWithAggregatesFilter<"Fragment"> | string
     title?: StringWithAggregatesFilter<"Fragment"> | string
     files?: JsonWithAggregatesFilter<"Fragment">
-    createAt?: DateTimeWithAggregatesFilter<"Fragment"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"Fragment"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Fragment"> | Date | string
   }
 
-  export type ProjectCreateInput = {
+  export type ProjectWhereInput = {
+    AND?: ProjectWhereInput | ProjectWhereInput[]
+    OR?: ProjectWhereInput[]
+    NOT?: ProjectWhereInput | ProjectWhereInput[]
+    id?: StringFilter<"Project"> | string
+    name?: StringFilter<"Project"> | string
+    userId?: StringFilter<"Project"> | string
+    createdAt?: DateTimeFilter<"Project"> | Date | string
+    updatedAt?: DateTimeFilter<"Project"> | Date | string
+    messages?: MessageListRelationFilter
+  }
+
+  export type ProjectOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    messages?: MessageOrderByRelationAggregateInput
+  }
+
+  export type ProjectWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    name: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    messages?: MessageCreateNestedManyWithoutProjectInput
+    AND?: ProjectWhereInput | ProjectWhereInput[]
+    OR?: ProjectWhereInput[]
+    NOT?: ProjectWhereInput | ProjectWhereInput[]
+    name?: StringFilter<"Project"> | string
+    userId?: StringFilter<"Project"> | string
+    createdAt?: DateTimeFilter<"Project"> | Date | string
+    updatedAt?: DateTimeFilter<"Project"> | Date | string
+    messages?: MessageListRelationFilter
+  }, "id">
+
+  export type ProjectOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ProjectCountOrderByAggregateInput
+    _max?: ProjectMaxOrderByAggregateInput
+    _min?: ProjectMinOrderByAggregateInput
   }
 
-  export type ProjectUncheckedCreateInput = {
-    id?: string
-    name: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    messages?: MessageUncheckedCreateNestedManyWithoutProjectInput
+  export type ProjectScalarWhereWithAggregatesInput = {
+    AND?: ProjectScalarWhereWithAggregatesInput | ProjectScalarWhereWithAggregatesInput[]
+    OR?: ProjectScalarWhereWithAggregatesInput[]
+    NOT?: ProjectScalarWhereWithAggregatesInput | ProjectScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Project"> | string
+    name?: StringWithAggregatesFilter<"Project"> | string
+    userId?: StringWithAggregatesFilter<"Project"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Project"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Project"> | Date | string
   }
 
-  export type ProjectUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    messages?: MessageUpdateManyWithoutProjectNestedInput
+  export type UsageWhereInput = {
+    AND?: UsageWhereInput | UsageWhereInput[]
+    OR?: UsageWhereInput[]
+    NOT?: UsageWhereInput | UsageWhereInput[]
+    key?: StringFilter<"Usage"> | string
+    points?: IntFilter<"Usage"> | number
+    expire?: DateTimeNullableFilter<"Usage"> | Date | string | null
   }
 
-  export type ProjectUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    messages?: MessageUncheckedUpdateManyWithoutProjectNestedInput
+  export type UsageOrderByWithRelationInput = {
+    key?: SortOrder
+    points?: SortOrder
+    expire?: SortOrderInput | SortOrder
   }
 
-  export type ProjectCreateManyInput = {
-    id?: string
-    name: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
+  export type UsageWhereUniqueInput = Prisma.AtLeast<{
+    key?: string
+    AND?: UsageWhereInput | UsageWhereInput[]
+    OR?: UsageWhereInput[]
+    NOT?: UsageWhereInput | UsageWhereInput[]
+    points?: IntFilter<"Usage"> | number
+    expire?: DateTimeNullableFilter<"Usage"> | Date | string | null
+  }, "key">
+
+  export type UsageOrderByWithAggregationInput = {
+    key?: SortOrder
+    points?: SortOrder
+    expire?: SortOrderInput | SortOrder
+    _count?: UsageCountOrderByAggregateInput
+    _avg?: UsageAvgOrderByAggregateInput
+    _max?: UsageMaxOrderByAggregateInput
+    _min?: UsageMinOrderByAggregateInput
+    _sum?: UsageSumOrderByAggregateInput
   }
 
-  export type ProjectUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ProjectUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type UsageScalarWhereWithAggregatesInput = {
+    AND?: UsageScalarWhereWithAggregatesInput | UsageScalarWhereWithAggregatesInput[]
+    OR?: UsageScalarWhereWithAggregatesInput[]
+    NOT?: UsageScalarWhereWithAggregatesInput | UsageScalarWhereWithAggregatesInput[]
+    key?: StringWithAggregatesFilter<"Usage"> | string
+    points?: IntWithAggregatesFilter<"Usage"> | number
+    expire?: DateTimeNullableWithAggregatesFilter<"Usage"> | Date | string | null
   }
 
   export type MessageCreateInput = {
@@ -4769,10 +5923,10 @@ export namespace Prisma {
     content: string
     role: $Enums.MessageRole
     type: $Enums.MessageType
-    createAt?: Date | string
+    createdAt?: Date | string
     updatedAt?: Date | string
-    project: ProjectCreateNestedOneWithoutMessagesInput
     fragment?: FragmentCreateNestedOneWithoutMessageInput
+    project?: ProjectCreateNestedOneWithoutMessagesInput
   }
 
   export type MessageUncheckedCreateInput = {
@@ -4780,7 +5934,7 @@ export namespace Prisma {
     content: string
     role: $Enums.MessageRole
     type: $Enums.MessageType
-    createAt?: Date | string
+    createdAt?: Date | string
     updatedAt?: Date | string
     projectId: string
     fragment?: FragmentUncheckedCreateNestedOneWithoutMessageInput
@@ -4791,10 +5945,10 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     role?: EnumMessageRoleFieldUpdateOperationsInput | $Enums.MessageRole
     type?: EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
-    createAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    project?: ProjectUpdateOneRequiredWithoutMessagesNestedInput
     fragment?: FragmentUpdateOneWithoutMessageNestedInput
+    project?: ProjectUpdateOneWithoutMessagesNestedInput
   }
 
   export type MessageUncheckedUpdateInput = {
@@ -4802,7 +5956,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     role?: EnumMessageRoleFieldUpdateOperationsInput | $Enums.MessageRole
     type?: EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
-    createAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     projectId?: StringFieldUpdateOperationsInput | string
     fragment?: FragmentUncheckedUpdateOneWithoutMessageNestedInput
@@ -4813,7 +5967,7 @@ export namespace Prisma {
     content: string
     role: $Enums.MessageRole
     type: $Enums.MessageType
-    createAt?: Date | string
+    createdAt?: Date | string
     updatedAt?: Date | string
     projectId: string
   }
@@ -4823,7 +5977,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     role?: EnumMessageRoleFieldUpdateOperationsInput | $Enums.MessageRole
     type?: EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
-    createAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -4832,7 +5986,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     role?: EnumMessageRoleFieldUpdateOperationsInput | $Enums.MessageRole
     type?: EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
-    createAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     projectId?: StringFieldUpdateOperationsInput | string
   }
@@ -4842,7 +5996,7 @@ export namespace Prisma {
     sandboxUrl: string
     title: string
     files: JsonNullValueInput | InputJsonValue
-    createAt?: Date | string
+    createdAt?: Date | string
     updatedAt?: Date | string
     message: MessageCreateNestedOneWithoutFragmentInput
   }
@@ -4853,7 +6007,7 @@ export namespace Prisma {
     sandboxUrl: string
     title: string
     files: JsonNullValueInput | InputJsonValue
-    createAt?: Date | string
+    createdAt?: Date | string
     updatedAt?: Date | string
   }
 
@@ -4862,7 +6016,7 @@ export namespace Prisma {
     sandboxUrl?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     files?: JsonNullValueInput | InputJsonValue
-    createAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     message?: MessageUpdateOneRequiredWithoutFragmentNestedInput
   }
@@ -4873,7 +6027,7 @@ export namespace Prisma {
     sandboxUrl?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     files?: JsonNullValueInput | InputJsonValue
-    createAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -4883,7 +6037,7 @@ export namespace Prisma {
     sandboxUrl: string
     title: string
     files: JsonNullValueInput | InputJsonValue
-    createAt?: Date | string
+    createdAt?: Date | string
     updatedAt?: Date | string
   }
 
@@ -4892,7 +6046,7 @@ export namespace Prisma {
     sandboxUrl?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     files?: JsonNullValueInput | InputJsonValue
-    createAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -4902,8 +6056,110 @@ export namespace Prisma {
     sandboxUrl?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     files?: JsonNullValueInput | InputJsonValue
-    createAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProjectCreateInput = {
+    id?: string
+    name: string
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    messages?: MessageCreateNestedManyWithoutProjectInput
+  }
+
+  export type ProjectUncheckedCreateInput = {
+    id?: string
+    name: string
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    messages?: MessageUncheckedCreateNestedManyWithoutProjectInput
+  }
+
+  export type ProjectUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    messages?: MessageUpdateManyWithoutProjectNestedInput
+  }
+
+  export type ProjectUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    messages?: MessageUncheckedUpdateManyWithoutProjectNestedInput
+  }
+
+  export type ProjectCreateManyInput = {
+    id?: string
+    name: string
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProjectUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProjectUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UsageCreateInput = {
+    key: string
+    points: number
+    expire?: Date | string | null
+  }
+
+  export type UsageUncheckedCreateInput = {
+    key: string
+    points: number
+    expire?: Date | string | null
+  }
+
+  export type UsageUpdateInput = {
+    key?: StringFieldUpdateOperationsInput | string
+    points?: IntFieldUpdateOperationsInput | number
+    expire?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type UsageUncheckedUpdateInput = {
+    key?: StringFieldUpdateOperationsInput | string
+    points?: IntFieldUpdateOperationsInput | number
+    expire?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type UsageCreateManyInput = {
+    key: string
+    points: number
+    expire?: Date | string | null
+  }
+
+  export type UsageUpdateManyMutationInput = {
+    key?: StringFieldUpdateOperationsInput | string
+    points?: IntFieldUpdateOperationsInput | number
+    expire?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type UsageUncheckedUpdateManyInput = {
+    key?: StringFieldUpdateOperationsInput | string
+    points?: IntFieldUpdateOperationsInput | number
+    expire?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -4921,6 +6177,20 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type EnumMessageRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageRole | EnumMessageRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageRole[] | ListEnumMessageRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageRole[] | ListEnumMessageRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageRoleFilter<$PrismaModel> | $Enums.MessageRole
+  }
+
+  export type EnumMessageTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageType | EnumMessageTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageType[] | ListEnumMessageTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageType[] | ListEnumMessageTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageTypeFilter<$PrismaModel> | $Enums.MessageType
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -4932,35 +6202,44 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type MessageListRelationFilter = {
-    every?: MessageWhereInput
-    some?: MessageWhereInput
-    none?: MessageWhereInput
+  export type FragmentNullableScalarRelationFilter = {
+    is?: FragmentWhereInput | null
+    isNot?: FragmentWhereInput | null
   }
 
-  export type MessageOrderByRelationAggregateInput = {
-    _count?: SortOrder
+  export type ProjectNullableScalarRelationFilter = {
+    is?: ProjectWhereInput | null
+    isNot?: ProjectWhereInput | null
   }
 
-  export type ProjectCountOrderByAggregateInput = {
+  export type MessageCountOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
+    content?: SortOrder
+    role?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    projectId?: SortOrder
   }
 
-  export type ProjectMaxOrderByAggregateInput = {
+  export type MessageMaxOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
+    content?: SortOrder
+    role?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    projectId?: SortOrder
   }
 
-  export type ProjectMinOrderByAggregateInput = {
+  export type MessageMinOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
+    content?: SortOrder
+    role?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    projectId?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -4981,74 +6260,6 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type EnumMessageRoleFilter<$PrismaModel = never> = {
-    equals?: $Enums.MessageRole | EnumMessageRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.MessageRole[] | ListEnumMessageRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.MessageRole[] | ListEnumMessageRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumMessageRoleFilter<$PrismaModel> | $Enums.MessageRole
-  }
-
-  export type EnumMessageTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.MessageType | EnumMessageTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.MessageType[] | ListEnumMessageTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.MessageType[] | ListEnumMessageTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumMessageTypeFilter<$PrismaModel> | $Enums.MessageType
-  }
-
-  export type ProjectScalarRelationFilter = {
-    is?: ProjectWhereInput
-    isNot?: ProjectWhereInput
-  }
-
-  export type FragmentNullableScalarRelationFilter = {
-    is?: FragmentWhereInput | null
-    isNot?: FragmentWhereInput | null
-  }
-
-  export type MessageCountOrderByAggregateInput = {
-    id?: SortOrder
-    content?: SortOrder
-    role?: SortOrder
-    type?: SortOrder
-    createAt?: SortOrder
-    updatedAt?: SortOrder
-    projectId?: SortOrder
-  }
-
-  export type MessageMaxOrderByAggregateInput = {
-    id?: SortOrder
-    content?: SortOrder
-    role?: SortOrder
-    type?: SortOrder
-    createAt?: SortOrder
-    updatedAt?: SortOrder
-    projectId?: SortOrder
-  }
-
-  export type MessageMinOrderByAggregateInput = {
-    id?: SortOrder
-    content?: SortOrder
-    role?: SortOrder
-    type?: SortOrder
-    createAt?: SortOrder
-    updatedAt?: SortOrder
-    projectId?: SortOrder
-  }
-
   export type EnumMessageRoleWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.MessageRole | EnumMessageRoleFieldRefInput<$PrismaModel>
     in?: $Enums.MessageRole[] | ListEnumMessageRoleFieldRefInput<$PrismaModel>
@@ -5067,6 +6278,20 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumMessageTypeFilter<$PrismaModel>
     _max?: NestedEnumMessageTypeFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
   export type JsonFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -5103,7 +6328,7 @@ export namespace Prisma {
     sandboxUrl?: SortOrder
     title?: SortOrder
     files?: SortOrder
-    createAt?: SortOrder
+    createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
@@ -5112,7 +6337,7 @@ export namespace Prisma {
     messageId?: SortOrder
     sandboxUrl?: SortOrder
     title?: SortOrder
-    createAt?: SortOrder
+    createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
@@ -5121,7 +6346,7 @@ export namespace Prisma {
     messageId?: SortOrder
     sandboxUrl?: SortOrder
     title?: SortOrder
-    createAt?: SortOrder
+    createdAt?: SortOrder
     updatedAt?: SortOrder
   }
   export type JsonWithAggregatesFilter<$PrismaModel = never> =
@@ -5151,6 +6376,201 @@ export namespace Prisma {
     _max?: NestedJsonFilter<$PrismaModel>
   }
 
+  export type MessageListRelationFilter = {
+    every?: MessageWhereInput
+    some?: MessageWhereInput
+    none?: MessageWhereInput
+  }
+
+  export type MessageOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ProjectCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProjectMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProjectMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
+  export type UsageCountOrderByAggregateInput = {
+    key?: SortOrder
+    points?: SortOrder
+    expire?: SortOrder
+  }
+
+  export type UsageAvgOrderByAggregateInput = {
+    points?: SortOrder
+  }
+
+  export type UsageMaxOrderByAggregateInput = {
+    key?: SortOrder
+    points?: SortOrder
+    expire?: SortOrder
+  }
+
+  export type UsageMinOrderByAggregateInput = {
+    key?: SortOrder
+    points?: SortOrder
+    expire?: SortOrder
+  }
+
+  export type UsageSumOrderByAggregateInput = {
+    points?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type FragmentCreateNestedOneWithoutMessageInput = {
+    create?: XOR<FragmentCreateWithoutMessageInput, FragmentUncheckedCreateWithoutMessageInput>
+    connectOrCreate?: FragmentCreateOrConnectWithoutMessageInput
+    connect?: FragmentWhereUniqueInput
+  }
+
+  export type ProjectCreateNestedOneWithoutMessagesInput = {
+    create?: XOR<ProjectCreateWithoutMessagesInput, ProjectUncheckedCreateWithoutMessagesInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutMessagesInput
+    connect?: ProjectWhereUniqueInput
+  }
+
+  export type FragmentUncheckedCreateNestedOneWithoutMessageInput = {
+    create?: XOR<FragmentCreateWithoutMessageInput, FragmentUncheckedCreateWithoutMessageInput>
+    connectOrCreate?: FragmentCreateOrConnectWithoutMessageInput
+    connect?: FragmentWhereUniqueInput
+  }
+
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
+  }
+
+  export type EnumMessageRoleFieldUpdateOperationsInput = {
+    set?: $Enums.MessageRole
+  }
+
+  export type EnumMessageTypeFieldUpdateOperationsInput = {
+    set?: $Enums.MessageType
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type FragmentUpdateOneWithoutMessageNestedInput = {
+    create?: XOR<FragmentCreateWithoutMessageInput, FragmentUncheckedCreateWithoutMessageInput>
+    connectOrCreate?: FragmentCreateOrConnectWithoutMessageInput
+    upsert?: FragmentUpsertWithoutMessageInput
+    disconnect?: FragmentWhereInput | boolean
+    delete?: FragmentWhereInput | boolean
+    connect?: FragmentWhereUniqueInput
+    update?: XOR<XOR<FragmentUpdateToOneWithWhereWithoutMessageInput, FragmentUpdateWithoutMessageInput>, FragmentUncheckedUpdateWithoutMessageInput>
+  }
+
+  export type ProjectUpdateOneWithoutMessagesNestedInput = {
+    create?: XOR<ProjectCreateWithoutMessagesInput, ProjectUncheckedCreateWithoutMessagesInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutMessagesInput
+    upsert?: ProjectUpsertWithoutMessagesInput
+    disconnect?: ProjectWhereInput | boolean
+    delete?: ProjectWhereInput | boolean
+    connect?: ProjectWhereUniqueInput
+    update?: XOR<XOR<ProjectUpdateToOneWithWhereWithoutMessagesInput, ProjectUpdateWithoutMessagesInput>, ProjectUncheckedUpdateWithoutMessagesInput>
+  }
+
+  export type FragmentUncheckedUpdateOneWithoutMessageNestedInput = {
+    create?: XOR<FragmentCreateWithoutMessageInput, FragmentUncheckedCreateWithoutMessageInput>
+    connectOrCreate?: FragmentCreateOrConnectWithoutMessageInput
+    upsert?: FragmentUpsertWithoutMessageInput
+    disconnect?: FragmentWhereInput | boolean
+    delete?: FragmentWhereInput | boolean
+    connect?: FragmentWhereUniqueInput
+    update?: XOR<XOR<FragmentUpdateToOneWithWhereWithoutMessageInput, FragmentUpdateWithoutMessageInput>, FragmentUncheckedUpdateWithoutMessageInput>
+  }
+
+  export type MessageCreateNestedOneWithoutFragmentInput = {
+    create?: XOR<MessageCreateWithoutFragmentInput, MessageUncheckedCreateWithoutFragmentInput>
+    connectOrCreate?: MessageCreateOrConnectWithoutFragmentInput
+    connect?: MessageWhereUniqueInput
+  }
+
+  export type MessageUpdateOneRequiredWithoutFragmentNestedInput = {
+    create?: XOR<MessageCreateWithoutFragmentInput, MessageUncheckedCreateWithoutFragmentInput>
+    connectOrCreate?: MessageCreateOrConnectWithoutFragmentInput
+    upsert?: MessageUpsertWithoutFragmentInput
+    connect?: MessageWhereUniqueInput
+    update?: XOR<XOR<MessageUpdateToOneWithWhereWithoutFragmentInput, MessageUpdateWithoutFragmentInput>, MessageUncheckedUpdateWithoutFragmentInput>
+  }
+
   export type MessageCreateNestedManyWithoutProjectInput = {
     create?: XOR<MessageCreateWithoutProjectInput, MessageUncheckedCreateWithoutProjectInput> | MessageCreateWithoutProjectInput[] | MessageUncheckedCreateWithoutProjectInput[]
     connectOrCreate?: MessageCreateOrConnectWithoutProjectInput | MessageCreateOrConnectWithoutProjectInput[]
@@ -5163,14 +6583,6 @@ export namespace Prisma {
     connectOrCreate?: MessageCreateOrConnectWithoutProjectInput | MessageCreateOrConnectWithoutProjectInput[]
     createMany?: MessageCreateManyProjectInputEnvelope
     connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
-  }
-
-  export type StringFieldUpdateOperationsInput = {
-    set?: string
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
   }
 
   export type MessageUpdateManyWithoutProjectNestedInput = {
@@ -5201,72 +6613,16 @@ export namespace Prisma {
     deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
   }
 
-  export type ProjectCreateNestedOneWithoutMessagesInput = {
-    create?: XOR<ProjectCreateWithoutMessagesInput, ProjectUncheckedCreateWithoutMessagesInput>
-    connectOrCreate?: ProjectCreateOrConnectWithoutMessagesInput
-    connect?: ProjectWhereUniqueInput
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
-  export type FragmentCreateNestedOneWithoutMessageInput = {
-    create?: XOR<FragmentCreateWithoutMessageInput, FragmentUncheckedCreateWithoutMessageInput>
-    connectOrCreate?: FragmentCreateOrConnectWithoutMessageInput
-    connect?: FragmentWhereUniqueInput
-  }
-
-  export type FragmentUncheckedCreateNestedOneWithoutMessageInput = {
-    create?: XOR<FragmentCreateWithoutMessageInput, FragmentUncheckedCreateWithoutMessageInput>
-    connectOrCreate?: FragmentCreateOrConnectWithoutMessageInput
-    connect?: FragmentWhereUniqueInput
-  }
-
-  export type EnumMessageRoleFieldUpdateOperationsInput = {
-    set?: $Enums.MessageRole
-  }
-
-  export type EnumMessageTypeFieldUpdateOperationsInput = {
-    set?: $Enums.MessageType
-  }
-
-  export type ProjectUpdateOneRequiredWithoutMessagesNestedInput = {
-    create?: XOR<ProjectCreateWithoutMessagesInput, ProjectUncheckedCreateWithoutMessagesInput>
-    connectOrCreate?: ProjectCreateOrConnectWithoutMessagesInput
-    upsert?: ProjectUpsertWithoutMessagesInput
-    connect?: ProjectWhereUniqueInput
-    update?: XOR<XOR<ProjectUpdateToOneWithWhereWithoutMessagesInput, ProjectUpdateWithoutMessagesInput>, ProjectUncheckedUpdateWithoutMessagesInput>
-  }
-
-  export type FragmentUpdateOneWithoutMessageNestedInput = {
-    create?: XOR<FragmentCreateWithoutMessageInput, FragmentUncheckedCreateWithoutMessageInput>
-    connectOrCreate?: FragmentCreateOrConnectWithoutMessageInput
-    upsert?: FragmentUpsertWithoutMessageInput
-    disconnect?: FragmentWhereInput | boolean
-    delete?: FragmentWhereInput | boolean
-    connect?: FragmentWhereUniqueInput
-    update?: XOR<XOR<FragmentUpdateToOneWithWhereWithoutMessageInput, FragmentUpdateWithoutMessageInput>, FragmentUncheckedUpdateWithoutMessageInput>
-  }
-
-  export type FragmentUncheckedUpdateOneWithoutMessageNestedInput = {
-    create?: XOR<FragmentCreateWithoutMessageInput, FragmentUncheckedCreateWithoutMessageInput>
-    connectOrCreate?: FragmentCreateOrConnectWithoutMessageInput
-    upsert?: FragmentUpsertWithoutMessageInput
-    disconnect?: FragmentWhereInput | boolean
-    delete?: FragmentWhereInput | boolean
-    connect?: FragmentWhereUniqueInput
-    update?: XOR<XOR<FragmentUpdateToOneWithWhereWithoutMessageInput, FragmentUpdateWithoutMessageInput>, FragmentUncheckedUpdateWithoutMessageInput>
-  }
-
-  export type MessageCreateNestedOneWithoutFragmentInput = {
-    create?: XOR<MessageCreateWithoutFragmentInput, MessageUncheckedCreateWithoutFragmentInput>
-    connectOrCreate?: MessageCreateOrConnectWithoutFragmentInput
-    connect?: MessageWhereUniqueInput
-  }
-
-  export type MessageUpdateOneRequiredWithoutFragmentNestedInput = {
-    create?: XOR<MessageCreateWithoutFragmentInput, MessageUncheckedCreateWithoutFragmentInput>
-    connectOrCreate?: MessageCreateOrConnectWithoutFragmentInput
-    upsert?: MessageUpsertWithoutFragmentInput
-    connect?: MessageWhereUniqueInput
-    update?: XOR<XOR<MessageUpdateToOneWithWhereWithoutFragmentInput, MessageUpdateWithoutFragmentInput>, MessageUncheckedUpdateWithoutFragmentInput>
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -5281,6 +6637,20 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedEnumMessageRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageRole | EnumMessageRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageRole[] | ListEnumMessageRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageRole[] | ListEnumMessageRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageRoleFilter<$PrismaModel> | $Enums.MessageRole
+  }
+
+  export type NestedEnumMessageTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageType | EnumMessageTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageType[] | ListEnumMessageTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageType[] | ListEnumMessageTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageTypeFilter<$PrismaModel> | $Enums.MessageType
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -5322,34 +6692,6 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type NestedEnumMessageRoleFilter<$PrismaModel = never> = {
-    equals?: $Enums.MessageRole | EnumMessageRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.MessageRole[] | ListEnumMessageRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.MessageRole[] | ListEnumMessageRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumMessageRoleFilter<$PrismaModel> | $Enums.MessageRole
-  }
-
-  export type NestedEnumMessageTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.MessageType | EnumMessageTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.MessageType[] | ListEnumMessageTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.MessageType[] | ListEnumMessageTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumMessageTypeFilter<$PrismaModel> | $Enums.MessageType
-  }
-
   export type NestedEnumMessageRoleWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.MessageRole | EnumMessageRoleFieldRefInput<$PrismaModel>
     in?: $Enums.MessageRole[] | ListEnumMessageRoleFieldRefInput<$PrismaModel>
@@ -5368,6 +6710,20 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumMessageTypeFilter<$PrismaModel>
     _max?: NestedEnumMessageTypeFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
   export type NestedJsonFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -5393,12 +6749,231 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type FragmentCreateWithoutMessageInput = {
+    id?: string
+    sandboxUrl: string
+    title: string
+    files: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FragmentUncheckedCreateWithoutMessageInput = {
+    id?: string
+    sandboxUrl: string
+    title: string
+    files: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FragmentCreateOrConnectWithoutMessageInput = {
+    where: FragmentWhereUniqueInput
+    create: XOR<FragmentCreateWithoutMessageInput, FragmentUncheckedCreateWithoutMessageInput>
+  }
+
+  export type ProjectCreateWithoutMessagesInput = {
+    id?: string
+    name: string
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProjectUncheckedCreateWithoutMessagesInput = {
+    id?: string
+    name: string
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProjectCreateOrConnectWithoutMessagesInput = {
+    where: ProjectWhereUniqueInput
+    create: XOR<ProjectCreateWithoutMessagesInput, ProjectUncheckedCreateWithoutMessagesInput>
+  }
+
+  export type FragmentUpsertWithoutMessageInput = {
+    update: XOR<FragmentUpdateWithoutMessageInput, FragmentUncheckedUpdateWithoutMessageInput>
+    create: XOR<FragmentCreateWithoutMessageInput, FragmentUncheckedCreateWithoutMessageInput>
+    where?: FragmentWhereInput
+  }
+
+  export type FragmentUpdateToOneWithWhereWithoutMessageInput = {
+    where?: FragmentWhereInput
+    data: XOR<FragmentUpdateWithoutMessageInput, FragmentUncheckedUpdateWithoutMessageInput>
+  }
+
+  export type FragmentUpdateWithoutMessageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sandboxUrl?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    files?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FragmentUncheckedUpdateWithoutMessageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sandboxUrl?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    files?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProjectUpsertWithoutMessagesInput = {
+    update: XOR<ProjectUpdateWithoutMessagesInput, ProjectUncheckedUpdateWithoutMessagesInput>
+    create: XOR<ProjectCreateWithoutMessagesInput, ProjectUncheckedCreateWithoutMessagesInput>
+    where?: ProjectWhereInput
+  }
+
+  export type ProjectUpdateToOneWithWhereWithoutMessagesInput = {
+    where?: ProjectWhereInput
+    data: XOR<ProjectUpdateWithoutMessagesInput, ProjectUncheckedUpdateWithoutMessagesInput>
+  }
+
+  export type ProjectUpdateWithoutMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProjectUncheckedUpdateWithoutMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MessageCreateWithoutFragmentInput = {
+    id?: string
+    content: string
+    role: $Enums.MessageRole
+    type: $Enums.MessageType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    project?: ProjectCreateNestedOneWithoutMessagesInput
+  }
+
+  export type MessageUncheckedCreateWithoutFragmentInput = {
+    id?: string
+    content: string
+    role: $Enums.MessageRole
+    type: $Enums.MessageType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    projectId: string
+  }
+
+  export type MessageCreateOrConnectWithoutFragmentInput = {
+    where: MessageWhereUniqueInput
+    create: XOR<MessageCreateWithoutFragmentInput, MessageUncheckedCreateWithoutFragmentInput>
+  }
+
+  export type MessageUpsertWithoutFragmentInput = {
+    update: XOR<MessageUpdateWithoutFragmentInput, MessageUncheckedUpdateWithoutFragmentInput>
+    create: XOR<MessageCreateWithoutFragmentInput, MessageUncheckedCreateWithoutFragmentInput>
+    where?: MessageWhereInput
+  }
+
+  export type MessageUpdateToOneWithWhereWithoutFragmentInput = {
+    where?: MessageWhereInput
+    data: XOR<MessageUpdateWithoutFragmentInput, MessageUncheckedUpdateWithoutFragmentInput>
+  }
+
+  export type MessageUpdateWithoutFragmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    role?: EnumMessageRoleFieldUpdateOperationsInput | $Enums.MessageRole
+    type?: EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    project?: ProjectUpdateOneWithoutMessagesNestedInput
+  }
+
+  export type MessageUncheckedUpdateWithoutFragmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    role?: EnumMessageRoleFieldUpdateOperationsInput | $Enums.MessageRole
+    type?: EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projectId?: StringFieldUpdateOperationsInput | string
+  }
+
   export type MessageCreateWithoutProjectInput = {
     id?: string
     content: string
     role: $Enums.MessageRole
     type: $Enums.MessageType
-    createAt?: Date | string
+    createdAt?: Date | string
     updatedAt?: Date | string
     fragment?: FragmentCreateNestedOneWithoutMessageInput
   }
@@ -5408,7 +6983,7 @@ export namespace Prisma {
     content: string
     role: $Enums.MessageRole
     type: $Enums.MessageType
-    createAt?: Date | string
+    createdAt?: Date | string
     updatedAt?: Date | string
     fragment?: FragmentUncheckedCreateNestedOneWithoutMessageInput
   }
@@ -5447,161 +7022,9 @@ export namespace Prisma {
     content?: StringFilter<"Message"> | string
     role?: EnumMessageRoleFilter<"Message"> | $Enums.MessageRole
     type?: EnumMessageTypeFilter<"Message"> | $Enums.MessageType
-    createAt?: DateTimeFilter<"Message"> | Date | string
+    createdAt?: DateTimeFilter<"Message"> | Date | string
     updatedAt?: DateTimeFilter<"Message"> | Date | string
     projectId?: StringFilter<"Message"> | string
-  }
-
-  export type ProjectCreateWithoutMessagesInput = {
-    id?: string
-    name: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type ProjectUncheckedCreateWithoutMessagesInput = {
-    id?: string
-    name: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type ProjectCreateOrConnectWithoutMessagesInput = {
-    where: ProjectWhereUniqueInput
-    create: XOR<ProjectCreateWithoutMessagesInput, ProjectUncheckedCreateWithoutMessagesInput>
-  }
-
-  export type FragmentCreateWithoutMessageInput = {
-    id?: string
-    sandboxUrl: string
-    title: string
-    files: JsonNullValueInput | InputJsonValue
-    createAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type FragmentUncheckedCreateWithoutMessageInput = {
-    id?: string
-    sandboxUrl: string
-    title: string
-    files: JsonNullValueInput | InputJsonValue
-    createAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type FragmentCreateOrConnectWithoutMessageInput = {
-    where: FragmentWhereUniqueInput
-    create: XOR<FragmentCreateWithoutMessageInput, FragmentUncheckedCreateWithoutMessageInput>
-  }
-
-  export type ProjectUpsertWithoutMessagesInput = {
-    update: XOR<ProjectUpdateWithoutMessagesInput, ProjectUncheckedUpdateWithoutMessagesInput>
-    create: XOR<ProjectCreateWithoutMessagesInput, ProjectUncheckedCreateWithoutMessagesInput>
-    where?: ProjectWhereInput
-  }
-
-  export type ProjectUpdateToOneWithWhereWithoutMessagesInput = {
-    where?: ProjectWhereInput
-    data: XOR<ProjectUpdateWithoutMessagesInput, ProjectUncheckedUpdateWithoutMessagesInput>
-  }
-
-  export type ProjectUpdateWithoutMessagesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ProjectUncheckedUpdateWithoutMessagesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type FragmentUpsertWithoutMessageInput = {
-    update: XOR<FragmentUpdateWithoutMessageInput, FragmentUncheckedUpdateWithoutMessageInput>
-    create: XOR<FragmentCreateWithoutMessageInput, FragmentUncheckedCreateWithoutMessageInput>
-    where?: FragmentWhereInput
-  }
-
-  export type FragmentUpdateToOneWithWhereWithoutMessageInput = {
-    where?: FragmentWhereInput
-    data: XOR<FragmentUpdateWithoutMessageInput, FragmentUncheckedUpdateWithoutMessageInput>
-  }
-
-  export type FragmentUpdateWithoutMessageInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    sandboxUrl?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    files?: JsonNullValueInput | InputJsonValue
-    createAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type FragmentUncheckedUpdateWithoutMessageInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    sandboxUrl?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    files?: JsonNullValueInput | InputJsonValue
-    createAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type MessageCreateWithoutFragmentInput = {
-    id?: string
-    content: string
-    role: $Enums.MessageRole
-    type: $Enums.MessageType
-    createAt?: Date | string
-    updatedAt?: Date | string
-    project: ProjectCreateNestedOneWithoutMessagesInput
-  }
-
-  export type MessageUncheckedCreateWithoutFragmentInput = {
-    id?: string
-    content: string
-    role: $Enums.MessageRole
-    type: $Enums.MessageType
-    createAt?: Date | string
-    updatedAt?: Date | string
-    projectId: string
-  }
-
-  export type MessageCreateOrConnectWithoutFragmentInput = {
-    where: MessageWhereUniqueInput
-    create: XOR<MessageCreateWithoutFragmentInput, MessageUncheckedCreateWithoutFragmentInput>
-  }
-
-  export type MessageUpsertWithoutFragmentInput = {
-    update: XOR<MessageUpdateWithoutFragmentInput, MessageUncheckedUpdateWithoutFragmentInput>
-    create: XOR<MessageCreateWithoutFragmentInput, MessageUncheckedCreateWithoutFragmentInput>
-    where?: MessageWhereInput
-  }
-
-  export type MessageUpdateToOneWithWhereWithoutFragmentInput = {
-    where?: MessageWhereInput
-    data: XOR<MessageUpdateWithoutFragmentInput, MessageUncheckedUpdateWithoutFragmentInput>
-  }
-
-  export type MessageUpdateWithoutFragmentInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    role?: EnumMessageRoleFieldUpdateOperationsInput | $Enums.MessageRole
-    type?: EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
-    createAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    project?: ProjectUpdateOneRequiredWithoutMessagesNestedInput
-  }
-
-  export type MessageUncheckedUpdateWithoutFragmentInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    role?: EnumMessageRoleFieldUpdateOperationsInput | $Enums.MessageRole
-    type?: EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
-    createAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    projectId?: StringFieldUpdateOperationsInput | string
   }
 
   export type MessageCreateManyProjectInput = {
@@ -5609,7 +7032,7 @@ export namespace Prisma {
     content: string
     role: $Enums.MessageRole
     type: $Enums.MessageType
-    createAt?: Date | string
+    createdAt?: Date | string
     updatedAt?: Date | string
   }
 
@@ -5618,7 +7041,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     role?: EnumMessageRoleFieldUpdateOperationsInput | $Enums.MessageRole
     type?: EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
-    createAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     fragment?: FragmentUpdateOneWithoutMessageNestedInput
   }
@@ -5628,7 +7051,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     role?: EnumMessageRoleFieldUpdateOperationsInput | $Enums.MessageRole
     type?: EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
-    createAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     fragment?: FragmentUncheckedUpdateOneWithoutMessageNestedInput
   }
@@ -5638,7 +7061,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     role?: EnumMessageRoleFieldUpdateOperationsInput | $Enums.MessageRole
     type?: EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
-    createAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

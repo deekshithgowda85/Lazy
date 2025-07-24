@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Vibe Code App",
+  title: "Lazy",
   description: "Generate code with AI",
 };
 

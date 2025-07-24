@@ -26,7 +26,7 @@ const ShimmerMessagess = () => {
     }, 2000);
 
     return () => clearInterval(interval);
-  },[messages.length]);
+  }, [messages.length]);
 
   return (
     <div className="flex items-center gap-2">
@@ -41,7 +41,7 @@ export const MessageLoading = () => {
   return (
     <div className="flex flex-col group px-2 pb-4">
       <div className="flex items-center gap-2 pl-2 mb-2">
-        <Image 
+        <Image
           src="/logo.svg"
           alt="Assistant logo"
           width={18}

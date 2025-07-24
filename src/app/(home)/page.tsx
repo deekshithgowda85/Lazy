@@ -1,15 +1,7 @@
 "use client"
-
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input";
 import { ProjectForm } from "@/modules/home/ui/components/project-form";
 import ProjectsList from "@/modules/home/ui/components/projects-list";
-import { useTRPC } from "@/trpc/client";
-import { useMutation, useQuery } from "@tanstack/react-query";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { toast } from "sonner";
 
 const Page = () => {
 

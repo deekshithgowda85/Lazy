@@ -8,7 +8,7 @@ import { Fragment } from "@/generated/prisma";
 import { ProjectHeader } from "../components/ProjectHeader";
 import { FragmentWeb } from "../components/fragment-web";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CodeIcon, Crown, CrownIcon, EyeIcon } from "lucide-react";
+import { CodeIcon,  CrownIcon, EyeIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { FileExplorer } from "@/components/file-explore";

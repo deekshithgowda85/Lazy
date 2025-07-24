@@ -9,13 +9,10 @@ import {
   SidebarMenuSub,
   SidebarProvider,
   SidebarRail,
-  SidebarFooter,
   SidebarGroup,
-  SidebarHeader,
 } from "@/components/ui/sidebar"
 import { ChevronRightIcon, FileIcon, FolderIcon } from "lucide-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "./ui/collapsible";
-import { Chevron } from "react-day-picker";
 
 
 

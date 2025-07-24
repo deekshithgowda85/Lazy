@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@clerk/nextjs";
-import { auth } from "@clerk/nextjs/server";
 import { formatDuration, intervalToDuration } from "date-fns";
 import { CrownIcon } from "lucide-react";
 import Link from "next/link";
@@ -9,23 +8,23 @@ import { useMemo } from "react";
 
 
 interface Props {
-  points: number;         // points available
-  msBeforeNext: number;   // ms until next reset
+  points: number;         
+  msBeforeNext: number;   
 }
 
 export const Usage = ({ points, msBeforeNext }: Props) => {
 
-  const { has } = useAuth();                        // Obtiene el objeto de autenticación de Clerk
-  const hasProAccess = has?.({ plan: "pro" });      // y dentro se verifica si el usuario tiene acceso a la plan "pro"
+  const { has } = useAuth();                       
+  const hasProAccess = has?.({ plan: "pro" });      
 
   const resetTime = useMemo(() => {
     try {
-      return formatDuration(                        // Formatea una duración en un formato legible por humanos.
-        intervalToDuration({                        // calcula la duración entre dos fechas y devuelve un objeto `Duration`
+      return formatDuration(                       
+        intervalToDuration({                      
           start: Date.now(),
           end: Date.now() + msBeforeNext,
         }),
-        { format: ["months", "days", "hours"] }     // Formateo del objeto de duración
+        { format: ["months", "days", "hours"] }     
       )
     } catch (error) {
       console.log("Error formating duration", error);

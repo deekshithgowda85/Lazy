@@ -1,4 +1,3 @@
-
 import { CopyCheckIcon, CopyIcon } from "lucide-react";
 import { useState, useMemo, useCallback, Fragment } from "react";
 import { Hint } from "./hint";
@@ -144,7 +143,7 @@ export const FileExplorer = ({ files }: FileExplorerProps) => {
     if (!selectedFile || !files[selectedFile]) {
       return "";
     }
-    let code = decodeHtmlEntities(files[selectedFile] || "");
+    const code = decodeHtmlEntities(files[selectedFile] || "");
   
     if (code.startsWith("```") && code.endsWith("```")) {
       const lines = code.split("\n");
@@ -153,7 +152,7 @@ export const FileExplorer = ({ files }: FileExplorerProps) => {
       return code.slice(1, -1);
     }
 
-    return code
+    return code;
   }, [selectedFile, files]);
 
   return (

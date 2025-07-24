@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { Message } from '../../../../generated/prisma/index';
 
 
 const ShimmerMessagess = () => {

@@ -5,12 +5,10 @@ import Link from "next/link";
 import {
   ChevronDownIcon,
   ChevronLeftIcon,
-  EditIcon,
   SunMoonIcon,
 } from "lucide-react"
 import { useTRPC } from "@/trpc/client";
 import { Button } from "@/components/ui/button";
-import { trpc } from '../../../../trpc/server';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,10 +20,8 @@ import {
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
-  DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Chevron } from "react-day-picker";
+} from "@/components/ui/dropdown-menu";
 
 interface Props {
   projectId: string

@@ -23,8 +23,8 @@ interface Props {
 
 export const ProjectView = ({ projectId }: Props) => {
 
-  const { has } = useAuth();                        // Obtiene el objeto de autenticación de Clerk
-  const hasProAccess = has?.({ plan: "pro" });      // y dentro se verifica si el usuario tiene acceso a la plan "pro"
+  const { has } = useAuth();                        
+  const hasProAccess = has?.({ plan: "pro" });      
 
   const [activeFragment, setActiveFragment] = useState<Fragment | null>(null);
   const [tabState, setTabState] = useState<"preview" | "code">("preview");
@@ -32,7 +32,7 @@ export const ProjectView = ({ projectId }: Props) => {
   return (
     <div className="h-screen">
       <ResizablePanelGroup direction="horizontal">
-        {/* Panel de mensajes */}
+      
         <ResizablePanel
           defaultSize={35}
           minSize={20}
@@ -57,7 +57,6 @@ export const ProjectView = ({ projectId }: Props) => {
 
         <ResizableHandle className="hover:bg-primary transition-colors" />
 
-      {/* Panel de código */}
        <ResizablePanel
           defaultSize={65}
           minSize={50}

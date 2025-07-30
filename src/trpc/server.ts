@@ -6,25 +6,8 @@ import { cache } from 'react';
 import { createTRPCContext } from './init';
 import { makeQueryClient } from './query-client';
 import { appRouter } from './routers/_app';
-
-
-/**
- * Instancia del "caller" de tRPC para uso exclusivo en el servidor.
- * Permite llamar a tus procedimientos tRPC (queries, mutations) como si fueran funciones directas
- * desde Server Actions o Route Handlers.
- *
- * IMPORTANTE: Se le pasa la función `createTRPCContext` como factory, no el contexto
- * resuelto. Esto asegura que se cree un nuevo contexto para cada petición,
- * manteniendo el aislamiento y la seguridad de los datos de cada usuario.
- * @see https://trpc.io/docs/server/server-side-calls
- */
 export const caller = appRouter.createCaller(createTRPCContext);
 
-
-/**
- *  Permite llamar a tus procedimientos tRPC desde tus Componentes de Servidor 
- *  como si fueran funciones asíncronas normales, sin necesidad de realizar una petición HTTP. 
- */
 export const getQueryClient = cache(makeQueryClient);
 
 export const trpc = createTRPCOptionsProxy({

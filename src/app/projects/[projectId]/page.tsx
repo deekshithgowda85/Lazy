@@ -20,9 +20,6 @@ const Page = async ({ params }: Props) => {
   void queryClient.prefetchQuery(trpc.projects.getOne.queryOptions({ id: projectId }));
 
   return (
-    // dehydrate serializa la cache -> "empaqueta" el estado de la caché para su transporte.
-    // HydrationBoundary es una utilidad de TanStack Query recibe el estado serializado de la caché a través la prop state
-    // Cuando se carga <AgentsView /> HydrationBoundary se encarga de volver a cargar la caché y "deserializa"/hydrata los datos
     <HydrationBoundary state={dehydrate(queryClient)}>
       <ErrorBoundary fallback={<Error />}>
         <Suspense fallback={<div>Loading project...</div>}>

@@ -27,7 +27,7 @@ function getLanguageFromExtension(filename:string):string {
   return extension || "text"
 }
 
-function decodeHtmlEntities(text: string): string {                                      // Gemini en su respuesta incluye entidades html como &lt; y &gt; que no se pueden decodificar en el navegador
+function decodeHtmlEntities(text: string): string {
   if (typeof document === 'undefined') {
     return text.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
   }
@@ -40,35 +40,35 @@ interface FileBreadcrumbProps {
   filepath: string;
 }
 
-const FileBreadcrumb = ({ filepath }: FileBreadcrumbProps) => {     // Se reciben las keys del archivo file de respuesta de la ia ("app/cta.tsx, app/features.tsx. etc")
-  const pathSegments = filepath.split("/");                         // Se dividen las keys en segmentos
+const FileBreadcrumb = ({ filepath }: FileBreadcrumbProps) => {
+  const pathSegments = filepath.split("/");
   const maxSegments = 3
 
   const renderBreadcrumbItems = () => {
-    if(pathSegments.length <= maxSegments){                         // Si el numero de segmentos es menor o igual a 3, se muestran todos
-      return pathSegments.map((segment, index) => {                 // Se recorren todos los segmentos
-        const isLast = index === pathSegments.length - 1;           // Se determina si es el último segmento
+    if(pathSegments.length <= maxSegments){
+      return pathSegments.map((segment, index) => {
+        const isLast = index === pathSegments.length - 1;
         return (
           <Fragment key={index}>
             <BreadcrumbItem>
-              {isLast ? (                                           // Si es el último segmento, se muestra el nombre del archivo mas oscuro y en negrita
+              {isLast ? (
                 <BreadcrumbPage className="font-medium">
                   {segment}
                 </BreadcrumbPage>
-              ) : (                                                 // Sino es el último renderiza con un color mas tenue                                                
-                <span className="text-muted-foreground">             
+              ) : (
+                <span className="text-muted-foreground">
                   {segment}
                 </span>
               )}
             </BreadcrumbItem>
 
-            {/* Sino es el último segmento, se renderiza un separador */}
-            {!isLast && <BreadcrumbSeparator />}                         
+          
+            {!isLast && <BreadcrumbSeparator />}
           
           </Fragment>
         )
       })
-    } else {                                                        // Si el numero de segmentos es mayor a 3, se muestra el primero, tres puntos y el último
+    } else {
       const firstSegment = pathSegments[0]
       const lastSegment = pathSegments[pathSegments.length - 1]
     
@@ -115,8 +115,8 @@ export const FileExplorer = ({ files }: FileExplorerProps) => {
   const [copied, setCopied] = useState(false);
 
   const [selectedFile, setSelectedFile] = useState<string | null>(() => {
-    const fileKeys = Object.keys(files);                                    // Obtenemos las claves de los archivos: "app/cta.tsx, app/features.tsx. etc"
-    return fileKeys.length > 0 ? fileKeys[0] : null;                        // Si hay archivos, seleccionamos el primero
+    const fileKeys = Object.keys(files);
+    return fileKeys.length > 0 ? fileKeys[0] : null;
   });
 
   const treeData = useMemo(() => {
@@ -139,7 +139,7 @@ export const FileExplorer = ({ files }: FileExplorerProps) => {
     }
   },[selectedFile, files])
 
-  const decodedCode = useMemo(() => {                                              // The AI sometimes wraps the code in backticks, which we need to remove.   
+  const decodedCode = useMemo(() => {
     if (!selectedFile || !files[selectedFile]) {
       return "";
     }

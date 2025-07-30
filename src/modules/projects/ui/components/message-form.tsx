@@ -17,9 +17,6 @@ import { Usage } from "./usage";
 import { useRouter } from "next/navigation";
 
 
-
-
-
 interface Props {
   projectId: string;
 }

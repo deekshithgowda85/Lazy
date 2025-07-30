@@ -5,7 +5,7 @@ import { SANDBOX_TIMEOUT } from "./types";
 
 export async function getSandbox(sandboxId: string){
   const sandbox = await Sandbox.connect(sandboxId);
-  await sandbox.setTimeout(SANDBOX_TIMEOUT) // 30 min. More time only premiun E2B users
+  await sandbox.setTimeout(SANDBOX_TIMEOUT) 
   return sandbox;
 }
 
@@ -25,16 +25,16 @@ export function lastAssistantTextMessageContent(result: AgentResult) {
     : undefined
 }
 
-export function parseAgentOutput(value: Message[]) {       // Extraen el contenido del primer mensaje de tipo text para poder guardarlo en la bd
-  const output = value[0];                                 // Del objeto message se extrae el contenido
+export function parseAgentOutput(value: Message[]) {
+  const output = value[0];
 
-  if (output.type !== "text") {                            // Primero se verifica que la salida del agente sea de tipo text
-    return "Fragment";                                     // Si no es de tipo text se devuelve "Fragment"
+  if (output.type !== "text") {
+    return "Fragment";
   }
 
-  if (Array.isArray(output.content)) {                     // Despues se verifica si el contenido es un array de strings
-    return output.content.map((txt) => txt).join("");      // Si lo es se concatena cada string en un string unido por un espacio
+  if (Array.isArray(output.content)) {
+    return output.content.map((txt) => txt).join("");
   } else {
-    return output.content;                                 // Si no es un array se devuelve el contenido directamente
+    return output.content;
   }
 }

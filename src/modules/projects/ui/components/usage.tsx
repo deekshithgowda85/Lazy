@@ -8,23 +8,23 @@ import { useMemo } from "react";
 
 
 interface Props {
-  points: number;         
-  msBeforeNext: number;   
+  points: number;
+  msBeforeNext: number;
 }
 
 export const Usage = ({ points, msBeforeNext }: Props) => {
 
-  const { has } = useAuth();                       
-  const hasProAccess = has?.({ plan: "pro" });      
+  const { has } = useAuth();
+  const hasProAccess = has?.({ plan: "pro" });
 
   const resetTime = useMemo(() => {
     try {
-      return formatDuration(                       
-        intervalToDuration({                      
+      return formatDuration(
+        intervalToDuration({
           start: Date.now(),
           end: Date.now() + msBeforeNext,
         }),
-        { format: ["months", "days", "hours"] }     
+        { format: ["months", "days", "hours"] }
       )
     } catch (error) {
       console.log("Error formating duration", error);

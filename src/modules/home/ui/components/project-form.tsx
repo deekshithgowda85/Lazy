@@ -66,7 +66,7 @@ export const ProjectForm = () => {
     })
   }
 
-  const onSelect = (value: string) => { // Establece el valor del input del prompt y valida el formulario
+  const onSelect = (value: string) => {
     form.setValue("value", value, {
       shouldDirty: true,
       shouldValidate: true,

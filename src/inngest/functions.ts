@@ -20,22 +20,22 @@ export const codeAgentFunction = inngest.createFunction(
   { id: "code-agent" },
   { event: "code-agent/run" },
 
-  async ({ event, step }) => { // event contiene el propmt y el projectId
+  async ({ event, step }) => {
 
     const sandboxId = await step.run("get-sandbox-id", async () => {
       const sandbox = await Sandbox.create("lazy-nextjs-test-2");
-      await sandbox.setTimeout(SANDBOX_TIMEOUT) // 30 min. More time only premiun E2B users
+      await sandbox.setTimeout(SANDBOX_TIMEOUT) 
       return sandbox.sandboxId;
     })
 
-    const previousMessages = await step.run("get-previous-messages", async () => {  // Obtener los mensajes anteriores del proyecto
+    const previousMessages = await step.run("get-previous-messages", async () => {  
       const formattedMessages: Message[] = []
       const messages = await prisma.message.findMany({
         where: {
           projectId: event.data.projectId,
         },
         orderBy: {
-          createdAt: "asc" // A mi me funcionó así. Si no te funciona cambialo a "desc"
+          createdAt: "asc" 
         },
         take: 5,
       });
@@ -48,10 +48,10 @@ export const codeAgentFunction = inngest.createFunction(
         })
       }
 
-      return formattedMessages; // if you use "desc" add ".reverse()"
+      return formattedMessages; 
     })
 
-    const state = createState<AgentState>(                                           // Crear un estado para el agente de código
+    const state = createState<AgentState>(
       {
         summary: "",
         files: {},
@@ -61,15 +61,15 @@ export const codeAgentFunction = inngest.createFunction(
       }
     );
 
-    const codeAgent = createAgent<AgentState>({                                      // Crear agente de código
+    const codeAgent = createAgent<AgentState>({
       name: "code-agent",
       description: "An expert coding agent",
       system: PROMPT,
       model: gemini({
-        model: "gemini-1.5-flash", // also disponible gemini-1.5-pro and others      // Gemini wraps the code in backticks, which we need to remove.
-        apiKey: process.env.GEMINI_API_KEY                                           // Look at <FileExplorer /> the DecodedCode function.
+        model: "gemini-1.5-flash",
+        apiKey: process.env.GEMINI_API_KEY
       }),
-      tools: [                                                                       // Herramientas del agente de código
+      tools: [
 
         createTool({
           name: "terminal",
@@ -160,41 +160,40 @@ export const codeAgentFunction = inngest.createFunction(
           },
         })
       ],
-      lifecycle: {                                                                   // Eventos de vida del agente de código
+      lifecycle: {
         onResponse: async ({ result, network }) => {
-          const lastAssistantMessageText = lastAssistantTextMessageContent(result);  // Obtener el último mensaje de texto de la respuesta del agente de código
+          const lastAssistantMessageText = lastAssistantTextMessageContent(result);
 
-          if (lastAssistantMessageText && network) {                                 // Si existe un último mensaje y un estado de trabajo del agente
-            if (lastAssistantMessageText.includes("<task_summary>")) {                 // Y el último mensaje de texto es un resumen de tarea
-              network.state.data.summary = lastAssistantMessageText;                 // lo guardamos en el estado compartido de la red. Esta es la señal de que la tarea ha finalizado.
+          if (lastAssistantMessageText && network) {
+            if (lastAssistantMessageText.includes("<task_summary>")) {
+              network.state.data.summary = lastAssistantMessageText;
             }
           }
 
-          return result;                                                             // Devolver la respuesta del agente de código
+          return result;
         },
       },
     });
 
-    const network = createNetwork<AgentState>({                                      // El network es el contenedor que ejecuta a los agentes en un ciclo, utiliza el router para decidir el siguiente paso y usa el state para mantener la memoria del trabajo realizado.       
+    const network = createNetwork<AgentState>({
       name: "coding-agent-network",
-      agents: [codeAgent],                                                           // Actualmente tenemos un solo agente de código
+      agents: [codeAgent],
       maxIter: 15,
       defaultState: state,
-      router: async ({ network }) => {                                               // el router decide qué agente debe actuar a continuación. Para ello usa network.state que es un state que almacena información durante la ejecutcion de las herramientas y el lifecycle de un agente de IA.
-        const summary = network.state.data.summary;                                  // Si el resumen de tarea está presente, no debe actuar porque ya se ha completado la tarea
-
+      router: async ({ network }) => {
+        const summary = network.state.data.summary;
         if (summary) {
           return
         }
 
-        return codeAgent;                                                            //  Si no hay resumen, pasa el control al único agente disponible, codeAgent".
+        return codeAgent;
       }
     })
 
-    const result = await network.run(event.data.value, { state: state });            // Inicia la ejecución de la red de agentes con el input del usuario y espera a que se complete. 
+    const result = await network.run(event.data.value, { state: state });
 
-    const fragmentTitleGenerator = createAgent({                                     // Sub-agentes para cuando termina el agente principal
-      name: "fragment-title-generator",                                              // Genera un título corto y descriptivo para el fragmento de código.
+    const fragmentTitleGenerator = createAgent({
+      name: "fragment-title-generator", 
       description: "A fragment title generator",
       system: FRAGMENT_TITLE_PROMPT,
       model: gemini({
@@ -203,7 +202,7 @@ export const codeAgentFunction = inngest.createFunction(
       }),
     });
 
-    const responseGenerator = createAgent({                                          // Genera una respuesta amigable y conversacional para el usuario final.
+    const responseGenerator = createAgent({
       name: "response-generator",
       description: "A response generator",
       system: RESPONSE_PROMPT,
@@ -213,8 +212,8 @@ export const codeAgentFunction = inngest.createFunction(
       }),
     });
 
-    const { output: fragmentTitleOutput } = await fragmentTitleGenerator.run(result.state.data.summary); // La respuesta de los agentes es un array de objetos tipo Message
-    const { output: responseOutput } = await responseGenerator.run(result.state.data.summary);           // Y se matizará el resultado con la función parseAgentOutput
+    const { output: fragmentTitleOutput } = await fragmentTitleGenerator.run(result.state.data.summary);
+    const { output: responseOutput } = await responseGenerator.run(result.state.data.summary);
 
     const isError =
       !result.state.data.summary ||
@@ -226,7 +225,7 @@ export const codeAgentFunction = inngest.createFunction(
       return `https://${host}`
     })
 
-    await step.run("save-result", async () => {                                       // Guardar el resultado de la tarea en la base de datos
+    await step.run("save-result", async () => {
 
       if (isError) {
         return await prisma.message.create({

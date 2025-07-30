@@ -61,7 +61,7 @@ const ProjectsList = () => {
                     })}
                   </p>
                 </div>
-              </div>  
+              </div>
             </Link>
           </Button>
         ))}

@@ -5,7 +5,7 @@ import superjason from 'superjson';
 
 export const createTRPCContext = cache(async () => {
   const session = await auth()
-  return {    
+  return {
     auth: session
   }
 })
@@ -27,7 +27,7 @@ const isAuthed = t.middleware(({ next, ctx }) => {
   }
   return next({
     ctx: {
-      auth: ctx.auth 
+      auth: ctx.auth
     }
   })
 })

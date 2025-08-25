@@ -23,14 +23,6 @@ This revolutionary platform streamlines **web development workflows** by automat
 
 ---
 
-## 📊 Project Insights
-<p align="center">
-  <img src="https://img.shields.io/github/stars/deekshithgowda85/lazy-ai-website-builder?style=for-the-badge&logo=github" alt="stars"/>
-  <img src="https://img.shields.io/github/forks/deekshithgowda85/lazy-ai-website-builder?style=for-the-badge&logo=github" alt="forks"/>
-  <img src="https://img.shields.io/github/issues/deekshithgowda85/lazy-ai-website-builder?style=for-the-badge&logo=github" alt="issues"/>
-  <img src="https://img.shields.io/github/languages/count/deekshithgowda85/lazy-ai-website-builder?style=for-the-badge" alt="languages"/>
-  <img src="https://img.shields.io/github/contributors/deekshithgowda85/lazy-ai-website-builder?style=for-the-badge" alt="contributors"/>
-</p>
 
 ---
 

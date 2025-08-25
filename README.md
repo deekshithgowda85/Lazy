@@ -1,45 +1,98 @@
-Lazy AI Website Builder
-Lazy AI Website Builder is an intelligent coding agent that transforms simple text prompts into fully functional websites. This revolutionary platform streamlines web development workflows by automating code generation, execution, and deployment, enabling developers and non-developers alike to create production-ready websites in seconds.
+<!-- PROJECT BANNER -->
+<p align="center">
+  <img src="https://img.shields.io/badge/Lazy%20AI%20Website%20Builder-%F0%9F%9A%80-blueviolet?style=for-the-badge&logo=vercel&logoColor=white" alt="Lazy AI Website Builder"/>
+</p>
 
-🚀 Features
-AI-Powered Generation: Leverages Google's Gemini API for intelligent code generation from natural language prompts.
-Secure Code Execution: Integrated E2B Sandbox ensures safe and reliable code execution environment.
-Instant Deployment: Automated website creation and deployment with one-click publishing.
-Modern Tech Stack: Built with cutting-edge technologies for optimal performance and scalability.
-User Authentication: Seamless user management and project organization with Clerk integration.
-Background Processing: Reliable task processing and job management with Inngest.
-🛠️ Technologies Used
-Frontend: Next.js 14, TypeScript, Tailwind CSS
-Backend: Next.js API Routes, Prisma ORM
-Database: PostgreSQL
-AI Integration: Google Gemini API
-Code Execution: E2B Sandbox
-Authentication: Clerk
-Background Jobs: Inngest
-Deployment: Vercel
-📦 Installation
-Prerequisites
-Ensure you have the following installed:
+<h1 align="center">🚀 Lazy AI Website Builder</h1>
+<p align="center">
+  <i>Transform text prompts into fully functional, production-ready websites in seconds.</i>
+</p>
 
-Node.js (v18 or higher)
-PostgreSQL (for local development)
-Google Gemini API key
-E2B API key
-Clerk account
-Setup
-Clone the repository:
-bash
+---
+
+<!-- ANIMATED DIVIDER -->
+<p align="center">
+  <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" width="80%" />
+</p>
+
+---
+
+## 🪄 Overview
+Lazy AI Website Builder is an intelligent coding agent that **transforms simple text prompts into fully functional websites**.  
+This revolutionary platform streamlines **web development workflows** by automating **code generation, execution, and deployment**, enabling developers and non-developers to create **production-ready websites in seconds**.
+
+---
+
+## 📊 Project Insights
+<p align="center">
+  <img src="https://img.shields.io/github/stars/deekshithgowda85/lazy-ai-website-builder?style=for-the-badge&logo=github" alt="stars"/>
+  <img src="https://img.shields.io/github/forks/deekshithgowda85/lazy-ai-website-builder?style=for-the-badge&logo=github" alt="forks"/>
+  <img src="https://img.shields.io/github/issues/deekshithgowda85/lazy-ai-website-builder?style=for-the-badge&logo=github" alt="issues"/>
+  <img src="https://img.shields.io/github/languages/count/deekshithgowda85/lazy-ai-website-builder?style=for-the-badge" alt="languages"/>
+  <img src="https://img.shields.io/github/contributors/deekshithgowda85/lazy-ai-website-builder?style=for-the-badge" alt="contributors"/>
+</p>
+
+---
+
+## 🔥 Features
+- 🤖 **AI-Powered Generation** – Leverages **Google Gemini API** to generate websites from text prompts.  
+- 🔒 **Secure Code Execution** – Integrated **E2B Sandbox** ensures safe and reliable execution.  
+- ⚡ **Instant Deployment** – Build and deploy with one click using **Vercel**.  
+- 🧩 **Modern Tech Stack** – Built for scalability and performance with **Next.js 14 & Prisma**.  
+- 🔑 **User Authentication** – Seamless auth and project control with **Clerk**.  
+- 🛠️ **Background Processing** – Reliable job management using **Inngest**.
+
+---
+
+## 🛠️ Tech Stack
+| Layer                | Technology                                         |
+|----------------------|--------------------------------------------------|
+| **Frontend**         | ![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=nextdotjs) ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.0-38B2AC?logo=tailwindcss) |
+| **Backend**          | ![Prisma](https://img.shields.io/badge/Prisma-ORM-2D3748?logo=prisma) ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?logo=typescript) |
+| **Database**         | ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-4169E1?logo=postgresql) |
+| **AI Integration**   | ![Google Gemini](https://img.shields.io/badge/Gemini%20AI-Google-4285F4?logo=google) |
+| **Code Execution**   | ![E2B](https://img.shields.io/badge/Sandbox-E2B-blue) |
+| **Authentication**   | ![Clerk](https://img.shields.io/badge/Auth-Clerk-purple) |
+| **Background Jobs**  | ![Inngest](https://img.shields.io/badge/Jobs-Inngest-orange) |
+| **Deployment**       | ![Vercel](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel) |
+
+---
+
+<!-- ANIMATED DIVIDER -->
+<p align="center">
+  <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" width="80%" />
+</p>
+
+---
+
+## 📦 Installation
+
+### 🔑 Prerequisites
+- Node.js (v18+)
+- PostgreSQL
+- Google Gemini API key
+- E2B API key
+- Clerk account
+
+---
+
+### ⚙️ Setup Instructions
+```bash
+# Clone the repository
 git clone https://github.com/deekshithgowda85/lazy-ai-website-builder.git
 cd lazy-ai-website-builder
-Install dependencies:
-bash
+
+# Install dependencies
 npm install
 # or
 yarn install
 # or
 pnpm install
-Create a .env.local file and add your environment variables:
-env
+```
+
+Create a `.env.local` file:
+
+```env
 # Database
 DATABASE_URL=your_postgresql_connection_string
 
@@ -54,60 +107,93 @@ E2B_API_KEY=your_e2b_api_key
 # Background Jobs
 INNGEST_EVENT_KEY=your_inngest_event_key
 INNGEST_SIGNING_KEY=your_inngest_signing_key
-Set up the database:
-bash
+```
+
+Run database setup:
+```bash
 npx prisma migrate dev
 npx prisma generate
+```
+
 Start the development server:
-bash
+```bash
 npm run dev
-The application will be accessible at http://localhost:3000.
+```
+Your app will be available at: **http://localhost:3000**
 
-🔗 Deployment
-Production: Deployed on Vercel
-Live Demo: lazy-dg.vercel.app
-📄 API Documentation
-Core Endpoints
-Endpoint	Method	Description
-/api/generate	POST	Generate website from text prompt
-/api/deploy	POST	Deploy generated website
-/api/projects	GET	Retrieve user projects
-/api/projects/[id]	GET/PUT/DELETE	Manage specific project
-Detailed API documentation is available in the docs/ directory.
+---
 
-🧪 Testing
-To run tests:
+## 🔗 Deployment
+- 🚀 **Production:** Deployed on **Vercel**  
+- 🌐 **Live Demo:** [lazy-dg.vercel.app](https://lazy-dg.vercel.app)
 
-bash
+---
+
+## 📡 API Documentation
+| Endpoint                | Method           | Description                          |
+|------------------------|-----------------|-------------------------------------|
+| `/api/generate`        | POST            | Generate website from text prompt   |
+| `/api/deploy`          | POST            | Deploy generated website            |
+| `/api/projects`        | GET             | Retrieve user projects              |
+| `/api/projects/[id]`   | GET/PUT/DELETE  | Manage a specific project           |
+
+📂 Detailed documentation is available in the `docs/` directory.
+
+---
+
+## 🧪 Testing
+```bash
+# Run all tests
 npm test
-# or
-yarn test
-# or
-pnpm test
-To run tests in watch mode:
 
-bash
+# Watch mode
 npm run test:watch
-📊 Performance Metrics
-80%+ automation of manual coding tasks
-95% faster prototyping compared to traditional methods
-15-30 seconds average generation time
-99.9% uptime with Vercel deployment
-🤝 Contributing
-Contributions are welcome! Please fork the repository and submit a pull request with your changes.
+```
 
-Fork the repository
-Create your feature branch (git checkout -b feature/AmazingFeature)
-Commit your changes (git commit -m 'Add some AmazingFeature')
-Push to the branch (git push origin feature/AmazingFeature)
-Open a Pull Request
-📄 License
-This project is licensed under the MIT License.
+---
 
-🙏 Acknowledgments
-Google Gemini for powerful AI capabilities
-E2B for secure code execution environment
-Vercel for seamless deployment infrastructure
-Clerk for authentication solutions
-Feel free to customize this template further based on the specific details and requirements of your project.
+## 📊 Performance Metrics
+| Metric                              | Value                              |
+|------------------------------------|-----------------------------------|
+| Automation of manual coding tasks   | 80%+                              |
+| Faster prototyping                 | 95%                               |
+| Average generation time             | 15–30 seconds                     |
+| Uptime                              | 99.9% with Vercel                 |
 
+---
+
+## 🤝 Contributing
+Contributions are welcome!  
+```bash
+# Fork and create a branch
+git checkout -b feature/AmazingFeature
+
+# Commit your changes
+git commit -m "Add AmazingFeature"
+
+# Push and submit PR
+git push origin feature/AmazingFeature
+```
+
+---
+
+## 📜 License
+This project is licensed under the **MIT License**.
+
+---
+
+## 🙏 Acknowledgments
+- [Google Gemini](https://ai.google/) for AI code generation
+- [E2B](https://e2b.dev/) for secure sandbox execution
+- [Vercel](https://vercel.com/) for seamless deployments
+- [Clerk](https://clerk.com/) for authentication solutions
+
+---
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" width="80%" />
+</p>
+
+<p align="center">
+  Made with ❤️ by Lazy AI
+</p>
